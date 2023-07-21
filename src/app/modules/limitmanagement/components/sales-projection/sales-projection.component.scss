@@ -1,0 +1,32 @@
+.selectOption .mat-form-field {
+    width: 100%;
+}
+.closeBtn{
+    color: #ff0000;
+}
+.errorMessage {
+    color: #ff0000;
+}
+
+.activeAll{
+    border: 1px solid #B4B4B4  !important;
+    background-color: #fff  !important;
+    color: #000 !important;
+    border-radius: 40px !important;
+    font-size: 14px !important;
+    line-height: 10px !important;
+    padding: 10.5px 20px !important;
+    margin-right: 15px !important;
+    white-space: nowrap !important;
+    box-shadow: none !important;
+}
+
+.activeAll.active {
+    background-color: #DDD  !important;
+    border: 1px solid #B4B4B4  !important;
+   // color: #fff !important;
+    box-shadow: none !important;
+}
+
+
+

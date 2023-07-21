@@ -1,0 +1,30 @@
+<div class="sidebarContainer {{ isOpen ? 'expendSideMenu' : ''}} ">
+    <div class="sidebarSubMenu">
+        <ul>
+            <li *ngIf="type != 'RPT'" class=" {{currentTab == 'sales'? 'active':''}}" (click)="tabChange('sales')">
+                <a href="javascript:void(0)"  (click)="goTo('sales')">
+                    <img src="../../../../../assets/image/menu-icons/limit.svg">
+                    <span>Sales Projection</span>
+                </a>
+            </li>
+            <li *ngIf="type != 'RPT'" class=" {{currentTab == 'limitlist'? 'active':''}}" (click)="tabChange('limitlist')">
+                <a href="javascript:void(0)"  (click)="goTo('limitlist')">
+                    <img src="../../../../../assets/image/menu-icons/limit-2.svg">
+                    <span>Limit List</span>
+                </a>
+            </li>
+            <li *ngIf="type != 'RPT' " class="{{currentTab == 'APR'? 'active':''}} "  (click)="tabChange('APR')">
+                <a (click)="goTo('approver')"  >
+                    <img src="../../../../../assets/image/menu-icons/limit-3.svg">
+                    <span>Limit Status</span>
+                </a>
+            </li>
+            <li *ngIf="type == 'RPT'"  class=" {{currentTab == 'RPT'? 'active':''}}" (click)="tabChange('RPT')">
+                <a href="javascript:void(0)"  (click)="goTo('RPT')">
+                    <img src="../../../../../assets/image/menu-icons/limit-3.svg">
+                    <span>Customer Report</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

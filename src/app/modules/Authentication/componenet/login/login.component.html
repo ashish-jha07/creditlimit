@@ -1,0 +1,22 @@
+<div>
+  <mat-toolbar class="login-toolbar" color="">Credit Limit Management System</mat-toolbar>
+<div class="container p-5">
+  <mat-card  >
+  <form [formGroup]="loginForm">
+    <div class="form-group mt-3">
+      <label for="exampleInputEmail1">Username</label>
+      <input type="text" class="form-control mt-2" formControlName="username" id="username" aria-describedby="emailHelp" placeholder="Enter user name">
+      <small id="emailHelp" *ngIf="submit && username?.invalid " class="form-text  text-danger"><span *ngIf="username?.errors?.['required']">
+        UserName is required.</span></small>
+    </div>
+    <div class="form-group mt-3">
+      <label for="exampleInputPassword1">Password</label>
+      <input type="password" class="form-control mt-2" formControlName="password" id="exampleInputPassword1" placeholder="Password">
+    </div>
+    <button type="submit" class="btn btn-primary mt-3" (click)="goTo()">Submit</button>
+  </form>
+  <button type="submit" class="btn btn-primary mt-3" (click)="submitsso()">Go SSO LOGIN</button>
+</mat-card>
+</div>
+</div>
+

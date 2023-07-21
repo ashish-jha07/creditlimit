@@ -1,0 +1,44 @@
+.pageData .pageCardBody,
+.pageData .pageCardHeader {
+    padding: 10px 10px;
+}
+
+.pageData .pageCardHeader .cardHeaderLeft h4,
+.pageData .pageCardHeader .cardHeaderRight h4 {
+    font-size: 16px;
+}
+
+.chartTitle, .salesSubHeader h2 {
+    font-size: 16px;
+}
+
+.innerBoxTitle {
+    font-size: 16px !important;
+}
+
+.mainTable2 {
+    max-height: 450px;
+}
+
+.mainTable2 .table thead {
+    background: #EEE;
+    position: sticky;
+    top: -1px;
+}
+
+.mainTable2 .table tbody .tableLastTd:last-child {
+    position: sticky;
+    bottom: -2px;
+}
+
+.boxHeaderBtn {
+    font-size: 12px !important;
+}
+
+.mainTable2 table thead tr th, .mainTable2 table tbody tr td {
+    padding: 12px 8px;
+}
+
+.secondTh table {
+    width: 100%;
+}

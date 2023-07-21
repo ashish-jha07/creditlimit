@@ -1,0 +1,329 @@
+   <!-- <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" mat-button mat-dialog-close data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Understood</button>
+        </div>
+      </div>
+    </div> -->
+
+    <div class="modalInner" [formGroup]="addLimitForm">
+        <div class="modalHeader">
+          <div class="row">
+            <div class="col-lg-11 col-md-11 col-sm-11 col-10">
+              <div class="modalTitle">
+                <h3 *ngIf="!this.data?.isedit">Add Limit ({{data?.partnerCode}})</h3>
+                
+                <h3 *ngIf="this.data?.isedit">Edit Limit ({{data?.partnerCode}})</h3>
+              </div>
+            </div>
+            <div class="col-lg-1 col-md-1 col-sm-1 col-2">
+              <div class="modalClose" mat-dialog-close data-dismiss="modal">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd" d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"/>
+                  <path fill-rule="evenodd" d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modalBody">
+          <div class="row">
+            <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+              <div class="selectOption">
+                <div class="form-group">
+                  <label>Limit Type<span style="color:red;">*</span></label>
+                  <mat-form-field appearance="fill" class="d-block">
+                    <mat-select formControlName="limitType" placeholder="Choose Any Limit Type" [disabled]="this.data?.isedit"  (selectionChange)="partnerInvestment()" >
+                        <mat-option *ngFor="let item of limitType" [value]="item.Code" >
+                          {{item.Value}}
+                        </mat-option>
+                      </mat-select>
+                
+                  </mat-form-field>
+                  <div *ngIf="submita && f?.['limitType']?.invalid " class="errorMessage mt-1">
+                    <div class="text-danger" *ngIf="f?.['limitType']?.errors && f?.['limitType']?.errors?.['required']">
+                      Limit type is required
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="f?.['limitType']?.value == 70 " class="col-lg-4 col-md-6 col-sm-6 col-12">
+              <div class="selectOption">
+                <div class="form-group">
+                  <label>CF Limit Type<span style="color:red;">*</span></label>
+                  <mat-form-field appearance="fill" class="d-block">
+                    <mat-select formControlName="CFLimitType" placeholder="Choose Any CF Limit Type"  (selectionChange)="chnageCfLimit()" [disabled]="this.data?.isedit">
+                      <!-- <mat-option selected >
+                      test
+                      </mat-option>  -->
+
+                      <!-- <mat-option >
+                        teset
+                      </mat-option> -->
+                      <mat-option *ngFor="let item of cFlimitType" [value]="item.Code"  >
+                          {{item.Value}}
+                        </mat-option>
+                      </mat-select>
+                  </mat-form-field>
+                  <div *ngIf="submita && f?.['CFLimitType']?.invalid " class="errorMessage mt-1">
+                    <div class="text-danger" *ngIf="f?.['CFLimitType']?.errors && f?.['CFLimitType']?.errors?.['required']">
+                     CF Limit type is required
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-6 col-12 mb-18">
+              <label class="mb-10">Bank Name</label>
+              <input type="text" formControlName="BankName" class="form-control themeTextInput" placeholder="Enter Bank Name" [readonly]="(f?.['limitType']?.value == 70 || f?.['limitType']?.value == 37 )? true : false">
+              <div *ngIf="submita && f?.['BankName']?.invalid " class="errorMessage mt-1">
+                <div class="text-danger" *ngIf="f?.['BankName']?.errors && f?.['BankName']?.errors?.['required']">
+                  Bank name is required
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-6 col-12 mb-18">
+              <label class="mb-10">Account Number as Bank</label>
+              <input type="text" formControlName="AccountNumber" class="form-control themeTextInput" placeholder="Enter Bank Account Number" [readonly]="(f?.['limitType']?.value == 70 || f?.['limitType']?.value == 37 )? true : false">
+              <div *ngIf="submita && f?.['AccountNumber']?.invalid " class="errorMessage mt-1">
+                <div class="text-danger" *ngIf="f?.['AccountNumber']?.errors && f?.['AccountNumber']?.errors?.['required']">
+                  Account number is required
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-6 col-12 mb-18" *ngIf="addLimitForm.controls['limitType'].value != '37'" >
+              <label class="mb-10">Total Limit (INR)</label>
+              <input type="text" maxlength="15" formControlName="TotalLimit" class="form-control themeTextInput" placeholder="Enter Total Limit" [readonly]="(f?.['limitType']?.value == 70 || f?.['limitType']?.value == 37 )? true : false">
+              <div *ngIf="submita && f?.['TotalLimit']?.invalid " class="errorMessage mt-1">
+                <div class="text-danger" *ngIf="f?.['TotalLimit']?.errors && f?.['TotalLimit']?.errors?.['required']">
+                  Total limit is required
+                </div>
+              </div>
+              <span class="text-danger" *ngIf="addLimitForm.controls['TotalLimit'].errors?.['maxlength']">   Total Limit must be less than 15 digits.</span>
+
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-6 col-12 mb-18 datepickerContainer">
+              <div class="inputGroup">
+                <label class="formLabel">Hedge Valid From<span style="color:red;">*</span></label>
+                <mat-form-field floatLabel="never" class="no-line" appearance="fill">
+                    <input readonly  (dateChange)="addEvent('hf', $event)" [max]="HedgeValidTomaxDate" formControlName="HedgeValidFrom"  placeholder="Choose Any Date" matInput [matDatepicker]="hedgeFrom">
+                    <mat-datepicker-toggle matSuffix [for]="hedgeFrom"></mat-datepicker-toggle>
+                    <mat-datepicker #hedgeFrom></mat-datepicker>
+                </mat-form-field>
+                <div *ngIf="submita && f?.['HedgeValidFrom']?.invalid " class="errorMessage mt-1">
+                  <div class="text-danger" *ngIf="f?.['HedgeValidFrom']?.errors && f?.['HedgeValidFrom']?.errors?.['required']">
+                    Hedge valid from is required
+                  </div>
+                </div>
+                <div  class="errorMessage mt-1 text-danger" *ngIf="submita && addLimitForm?.hasError('notValidDate') " >Hedge Valid From date should be greater than or equal to Hedge Valid To date </div>
+          
+
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-6 col-12 mb-18 datepickerContainer">
+              <div class="inputGroup">
+                <label class="formLabel">Hedge Valid To</label>
+                <mat-form-field floatLabel="never" class="no-line" appearance="fill">
+                    <input readonly value="2022-02-22" [min]="HedgeValidTominDate"  placeholder="Choose Any Date" (dateChange)="addEvent('ht', $event)" formControlName="HedgeValidTo" matInput [matDatepicker]="hedgeTo">
+                    <mat-datepicker-toggle matSuffix [for]="hedgeTo"></mat-datepicker-toggle>
+                    <mat-datepicker #hedgeTo [disabled]="isReadOnly"></mat-datepicker>
+                </mat-form-field>
+                <div *ngIf="submita && f?.['HedgeValidTo']?.invalid " class="errorMessage mt-1">
+                  <div class="text-danger" *ngIf="f?.['HedgeValidTo']?.errors && f?.['HedgeValidTo']?.errors?.['required']">
+                    Hedge valid to is required
+                  </div>
+                </div>
+              </div>
+            </div>
+            <input type="number" maxlength="15" formControlName="usedAmount" [hidden]="true" class="form-control themeTextInput" placeholder="Enter Requested Amount">
+            <div class="col-lg-4 col-md-6 col-sm-6 col-12 mb-18">
+              <label class="mb-10">Requested Amount (INR)<span style="color:red;">*</span></label>
+              <!-- (change)="rAChanged($event)" -->
+              <input type="text" (keypress)="keyPressNumbers($event)" maxlength="15"  pattern="^[0-9]*$" formControlName="RequestedAmount" class="form-control themeTextInput" placeholder="Enter Requested Amount" [readonly]="data?.isCancel? true : false">
+              <div  class="errorMessage mt-1 text-danger" *ngIf="submita && addLimitForm?.hasError('notValid') && !f?.['RequestedAmount']?.errors" >Requested Amount should be less than or equal to {{ (f?.['limitType']?.value == 70) ? f?.['TotalLimit']?.value - f?.['usedAmount']?.value : f?.['TotalLimit']?.value}}</div>
+              <div *ngIf="submita && f?.['RequestedAmount']?.invalid" class="errorMessage mt-1">
+                <div class="text-danger" *ngIf="f?.['RequestedAmount']?.errors && f?.['RequestedAmount']?.errors?.['required']">
+                  Requested amount is required
+                </div>
+              </div>
+              <span class="text-danger" *ngIf="addLimitForm.controls['RequestedAmount'].errors?.['maxlength']">   Requested Amount must be less than 15 digits.</span>
+
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-6 col-12 mb-18" *ngIf="data?.IsApprover">
+              <label class="mb-10">Approved Requested Amount (INR)<span style="color:red;">*</span></label>
+              <!-- (change)="rAChanged($event)" -->
+              <input type="text" (keypress)="keyPressNumbers($event)" maxlength="15"  pattern="^[0-9]*$" formControlName="ApprovedRequestedAmount" class="form-control themeTextInput" placeholder="Enter Requested Amount" >
+              <!-- <div  class="errorMessage mt-1 text-danger" *ngIf="submita && addLimitForm?.hasError('notValid') && !f?.['RequestedAmount']?.errors" >Requested Amount should be less than or equal to {{ (f?.['limitType']?.value == 70) ? f?.['TotalLimit']?.value - f?.['usedAmount']?.value : f?.['TotalLimit']?.value}}</div> -->
+              <div *ngIf="submita && f?.['ApprovedRequestedAmount']?.invalid" class="errorMessage mt-1">
+                <div class="text-danger" *ngIf="f?.['ApprovedRequestedAmount']?.errors && f?.['ApprovedRequestedAmount']?.errors?.['required']">
+                  Approved Requested amount is required
+                </div>
+              </div>
+              <span class="text-danger" *ngIf="addLimitForm.controls['ApprovedRequestedAmount'].errors?.['maxlength']">  Approved Requested Amount must be less than 15 digits.</span>
+
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-6 col-12 mb-18 datepickerContainer" *ngIf="data?.IsApprover">
+              <div class="inputGroup">
+                <label class="formLabel">Expired Valid To<span style="color:red;">*</span></label>
+                <mat-form-field floatLabel="never" class="no-line" appearance="fill">
+                    <input readonly   formControlName="ExpiredLimitTo"  placeholder="Choose Any Date" matInput [matDatepicker]="ExpiredFrom">
+                    <mat-datepicker-toggle matSuffix [for]="ExpiredFrom"></mat-datepicker-toggle>
+                    <mat-datepicker #ExpiredFrom></mat-datepicker>
+                </mat-form-field>
+                <div *ngIf="submita && f?.['ExpiredLimitTo']?.invalid " class="errorMessage mt-1">
+                  <div class="text-danger" *ngIf="f?.['ExpiredLimitTo']?.errors && f?.['ExpiredLimitTo']?.errors?.['required']">
+                    Expired Limit To is required
+                  </div>
+                </div>
+                <!-- <div  class="errorMessage mt-1 text-danger" *ngIf="submita && addLimitForm?.hasError('notValidDate') " >Hedge Valid From date should be greater than or equal to Hedge Valid To date </div> -->
+          
+
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-6 col-12 mb-18 datepickerContainer">
+              <div class="inputGroup">
+                <label class="formLabel">Credit Valid From<span style="color:red;">*</span></label>
+                <mat-form-field floatLabel="never" class="no-line" appearance="fill">
+                    <input value="2022-02-22" [max]="CreditLimitTomaxDate" readonly placeholder="Choose Any Date" (dateChange)="addEvent('cf', $event)" formControlName="CreditLimitFrom" matInput [matDatepicker]="creditFrom">
+                    <mat-datepicker-toggle matSuffix [for]="creditFrom"></mat-datepicker-toggle>
+                    <mat-datepicker #creditFrom></mat-datepicker>
+                </mat-form-field>
+                <div *ngIf="submita && f?.['CreditLimitFrom']?.invalid " class="errorMessage mt-1">
+                  <div class="text-danger" *ngIf="f?.['CreditLimitFrom']?.errors && f?.['CreditLimitFrom']?.errors?.['required']">
+                    Credit limit from is required
+                  </div>
+                </div>
+                <div  class="errorMessage mt-1 text-danger" *ngIf="submita && addLimitForm?.hasError('notValidDate1') " >Credit Valid From date should be greater than or equal to Credit Valid To date </div>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-6 col-12 mb-18 datepickerContainer">
+              <div class="inputGroup">
+                <label class="formLabel">Credit Valid To</label>
+                <mat-form-field floatLabel="never" class="no-line" appearance="fill">
+                    <input value="2022-02-22" readonly [min]="CreditLimitTomixDate" placeholder="Choose Any Date" (dateChange)="addEvent('ct', $event)" formControlName="CreditLimitTo" matInput [matDatepicker]="creditTo">
+                    <mat-datepicker-toggle matSuffix [for]="creditTo"></mat-datepicker-toggle>
+                    <mat-datepicker #creditTo [disabled]="isReadOnly"></mat-datepicker>
+                </mat-form-field>
+                <div *ngIf="submita && f?.['CreditLimitTo']?.invalid " class="errorMessage mt-1">
+                  <div class="text-danger" *ngIf="f?.['CreditLimitTo']?.errors && f?.['CreditLimitTo']?.errors?.['required']">
+                    Credit limit to is required
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="f?.['limitType']?.value == 70 " class="mainTable2 mt-20">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Partner Code</th>
+                            <th>Amount (INR)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of partenerCFAmounts;">
+                            <td>{{item?.PartnerCode}}</td>
+                            <td class="text-left">{{item?.Amount.toLocaleString('en-IN')}}</td>
+                        </tr>
+                    </tbody>
+                </table> 
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-6 col-12 mb-18">
+              <label for="formFile" class="form-label">Upload</label>
+              <input class="form-control"   formControlName="Img" (change)="upload($event)" type="file" id="formFile">
+              <div *ngIf="submita && f?.['Img']?.invalid " class="errorMessage mt-1">
+                <div class="text-danger" *ngIf="f?.['Img']?.errors && f?.['Img']?.errors?.['required']">
+                  Upload is required
+                </div>
+              </div>
+              
+<div *ngIf="fileRemoveName">
+              <div class="buttonContainer mt-2" *ngIf="data?.isedit && data?.FileName && fileName ">
+                <div style="padding-bottom: 5px;" >Download </div>
+                  <div class="popupdown"> 
+                    <a (click)="downloadfile(data?.FileName)"  style="cursor: pointer;">{{fileName}}</a>
+                    <img src="../../../../../assets/image/cancel.png" (click)="fileRemove()">
+                  </div>
+              </div>
+              </div>
+              <!-- <input class="form-control"   formControlName="Img" (change)="upload($event)" type="file" id="formFile"> -->
+              <!-- <div *ngIf="submita && f?.['Img']?.invalid " class="errorMessage mt-1">
+                <div class="text-danger" *ngIf="f?.['Img']?.errors && f?.['Img']?.errors?.['required']">
+                  Upload is required
+                </div>
+              </div> -->
+              
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-6 col-12 mb-18">
+                <label class="form-label">Compliance Remarks</label>
+                <textarea class="form-control" formControlName="Remarks" rows="3" maxlength="255"></textarea>
+                <div class="mt-2"> Maximum 255 Characters</div>
+
+              </div>
+            <!-- <div *ngIf=" f?.['Remarks']?.errors && f?.['Remarks']?.errors?.['maxLength']"          >
+              Maximum of 255 characters allowed
+             
+            </div> -->
+            <!-- <div *ngIf="f?.['Remarks']?.['errors']?.['maxlength']">
+              First Name should be less than 5 char.
+            </div>
+            <div *ngIf="f?.['Remarks']?.['errors']?.['maxLength']">
+              First Name should be less than 5 char.
+            </div> -->
+            <!-- <div *ngIf="f?.Remarks?.errors?.['maxLength']"> 
+              Name can be max 10 characters long.
+               </div>	 -->
+            <!-- <div *ngIf="submita && f?.['Remarks']?.invalid " class="errorMessage mt-1">
+              <div class="text-danger" *ngIf="f?.['Remarks']?.errors && f?.['Remarks']?.errors?.['maxLength']">
+                Credit limit to is required
+              </div>
+            </div> -->
+            <!-- <div class="col-lg-4 col-md-4 col-sm-6 col-12 mb-18">
+              <div class="mainTable2">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Partner Code</th>
+                            <th>Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of partenerCFAmounts;">
+                            <td>{{item?.PartnerCode}}</td>
+                            <td class="text-left">{{item?.Amount}}</td>
+                        </tr>
+                    </tbody>
+                </table> 
+              </div>
+            </div> -->
+          </div>
+        </div>
+        <div class="modalFooter">
+            <div class="row">
+              <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="btnGroup d-flex justify-content-end">
+                  <div class="buttonContainer mr-10">
+                    <a>
+                      <button type="button" mat-dialog-close data-dismiss="modal" class="btn outlineBtn">Cancel</button>
+                    </a>
+                  </div>
+                  <div class="buttonContainer text-right">
+                    <a>
+                      <button _ngcontent-key-c136="" type="button" class="btn" (click)="submit()">{{data?.isedit? 'Update': 'Save'}}</button>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>

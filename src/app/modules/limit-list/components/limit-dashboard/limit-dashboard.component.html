@@ -1,0 +1,1452 @@
+<div  *ngIf="partnerDetail"> <!--- expendSidebar --->
+    <!-- <div class="pageBreadcreumbTitle">
+      <div class="breadcrumbContainer">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Limit Management</a></li>
+            <li class="breadcrumb-item"><a href="#">Limit List</a></li>
+            <li class="breadcrumb-item"><a href="#">Raise A Request</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+          </ol>
+        </nav>
+      </div>
+      <div class="pageTitle">
+          <h1>Dashboard</h1>
+      </div>
+    </div> -->
+
+    <!-- <mat-tab-group class="matTabsContainerBlack" animationDuration="0ms" mat-align-tabs="start">
+        <mat-tab label="Individual Partner">
+            <div class="searchContainer">
+                <div class="row">
+                    <div class="col-lg-5 col-md-8 col-sm-8 col-xs-12">
+                        <form>
+                            <div class="row">
+                                <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                    <label class="mb-10">Enter a partner code</label>
+                                    <input type="text" class="form-control themeTextInput">
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                    <div class="buttonContainer d-flex justify-content-center align-items-end h-100 mt-10-576">
+                                        <button type="button" class="btn">
+                                            Search
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </mat-tab>
+        <mat-tab label="Bulk Request"> 
+            <div class="searchContainer">
+                <div class="row">
+                    <div class="col-lg-5 col-md-8 col-sm-8 col-xs-12">
+                        <div class="buttonContainer mb-20">
+                            <button type="button" class="btn">
+                                Download Template
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                        <label class="mb-10">Upload Request Form</label>
+                        <div class="uploadFileContainer m-0">
+                            <h1> 
+                                <img src="../../../../../assets/image/upload-icon.svg" alt="Upload Icon">
+                            </h1> 
+                            <input type="file" #inputFile id="file" class="input" >
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </mat-tab>
+    </mat-tab-group> -->
+
+    <div class="pageData mt-20 mb-20 p-0 br-5">
+        <div class="pageCardHeader">
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-12">
+                    <div class="cardHeaderLeft">
+                        <h4>
+                            Partner Details
+                        </h4>
+                    </div>
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-8 col-12 d-flex align-items-center">
+                    <div class="cardHeaderRight">
+                        <p>
+                            Last Request Raised on :
+                            <span>{{ partnerDetail?.LastRequestRaised| date: 'dd, MMM yyyy' }} ({{ partnerDetail?.timeago}})</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="pageCardBody">
+            <div class="row">
+                <div class="col-lg-2 col-md-6 col-sm-6 col-12 borderRight">
+                    <div class="partnerDetails">
+                        <p>
+                            <span>
+                                {{partnerDetail?.PartnerName}}  ({{partnerDetail?.PartnerCode}})
+                            </span>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 col-12 borderRight">
+                    <div class="partnerDetails">
+                        <p>
+                            Branch :
+                            <span>
+                                {{partnerDetail?.BranchName}}
+                            </span>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 col-sm-6 col-12 borderRight">
+                    <div class="partnerDetails">
+                        <p>
+                            Type :
+                            <span>
+                                {{partnerDetail?.Type}}
+                            </span>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 col-sm-6 col-12 borderRight">
+                    <div class="partnerDetails">
+                        <p>
+                            Partner since :
+                            <span>
+                                {{partnerDetail?.PartnerSince | date:'mediumDate'}}
+                            </span>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 col-sm-6 col-12 borderRight">
+                    <div class="partnerDetails">
+                        <p>
+                            CD on invoice :
+                            <span>
+                               {{partnerDetail?.CDonInvoice}}
+                            </span>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-8 col-md-12 col-sm-12 col-12 borderRight mb-0 mOrder1">
+                    <div class="partnerDetailSold">
+                        <div class="innerBorderRight active">
+                            <div class="partnerDetails">
+                                <p>
+                                    <span>
+                                        Sold to code
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="innerBorderRight">
+                            <div class="partnerDetails">
+                                <p>
+                                    <span>
+                                        {{partnerDetail?.SoldToCodeCount}}
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                        <!-- <div class="innerBorderRight" *ngIf="partnerDetail?.SoldToCode">
+                            <div class="partnerDetails">
+                                <p>
+                                    <span>
+                                        HHP(01)
+                                    </span>
+                                </p>
+                            </div>
+                        </div> -->
+                        <div class="innerBorderRight"  *ngFor="let item of partnerDetail?.SoldToCode; let i=index">
+                            <div class="partnerDetails">
+                                <p>
+                                    <span>
+                                        {{item?.MainDivision +' '+ '('+item?.DivisionCount+')'}}
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                        <!-- <div class="innerBorderRight" *ngIf="partnerDetail?.SoldToCode">
+                            <div class="partnerDetails">
+                                <p>
+                                    <span>
+                                        Service (01)
+                                    </span>
+                                </p>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 col-12 borderRight textAlignCenter mb-0 mOrder2">
+                    <div class="partnerDetails">
+                        <p>
+                            Last Request Status :
+                            <span *ngIf="partnerDetail?.LastRequestStatus == 'Approved'" style="color: green;">
+                              {{partnerDetail?.LastRequestStatus}}
+                            </span>
+                            <span *ngIf="partnerDetail?.LastRequestStatus == 'Decline'" style="color: red;">
+                                {{partnerDetail?.LastRequestStatus}}
+                              </span>
+                              <span *ngIf="partnerDetail?.LastRequestStatus == 'Pending'" style="color: #c9c906;">
+                                {{partnerDetail?.LastRequestStatus}}
+                              </span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="pageData mb-20 p-0 br-5">
+        <div class="row">
+            <div class="col-lg-8 col-md-12 col-sm-12 col-12 pageCardHeaderRight">
+                <div class="pageCardHeader">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                            <div class="cardHeaderLeft">
+                                <h4>
+                                    Limit Details (INR)
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pageCardBody">
+                    <div class="row align-items-center">
+                        <div class="col-lg-3 col-md-6 col-sm-6 col-12 borderRightDdd">
+                            <div class="d-flex justify-content-center align-items-center">
+                                <app-charts chartData="{{existingPiChart}}" text="Existing"></app-charts>
+                                <div class="chartInnerTxt">
+                                    <p>Total</p>
+                                    <h5>{{existingTotal}}</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-6 col-12 ">
+                            <div class="d-flex justify-content-center align-items-center">
+                                <app-charts chartData="{{revisedPiChart}}" text="Revised"></app-charts>
+                                <div class="chartInnerTxt">
+                                    <p>Total</p>
+                                    <h5>{{revisedTotal}}</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-12 col-sm-12 col-12 borderRightDdd">
+                            <!-- <div class="row mb-2 pb-1 border-bottom">
+                                <div class="col-lg-5 col-md-5 col-sm-5 col-5">
+                                    <div class="px-2"> <span class="font-weight-light text-secondary">Open Limit</span></div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-4">
+                                    <div class="d-flex justify-content-center"> <span class="font-weight-light text-secondary">Change Value</span></div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-3">
+                                    <div class="d-flex justify-content-center"> <span class="font-weight-light text-secondary">Change %</span></div>
+                                </div>
+                            </div>
+                         
+                            <div class="row" *ngFor="let item of limitDetails?.RevisedPiChart; let i=index">
+                                <div class="col-lg-5 col-md-5 col-sm-5 col-5" >
+                                    <div class="row py-0 my-0">
+                                        <div class="col-lg-2 col-md-2 col-sm-2 col-2pr-0 mr-0  pt-2 my-0" >
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" [ngStyle]="{'fill': '' + item?.colorcode + '','background':'' + item?.colorcode + '','border-radius':'50%' }" fill="currentColor" class="bi bi-circle" viewBox="0 0 16 16">
+                                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                              </svg>
+                                        </div>
+                                        <div class="col-lg-10 col-md-10 col-sm-10 col-10 pl-0 py-0 my-0"  >
+                                            <span class="font-weight-bold" style="font-weight: bold; font-size: 15px;">
+                                                {{item?.LimitTotalValue  | currency:'INR'}}
+                                            </span> 
+                                            <p class="pt-1">{{item?.LimitDescription}}</p>  
+                                        </div>
+                                    </div>  
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-4">
+                                    <div class="d-flex justify-content-center">
+                                        <span class="font-weight-bold" style=" font-weight: bold; font-size: 15px;">
+                                            {{item?.DifferenceValue  | currency:'INR'}}
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-3">
+                                    <div class="d-flex justify-content-center"> 
+                                        <span  class="font-weight-bold" style=" font-weight: bold; font-size: 15px;">
+                                            {{((item?.LimitTotalValue - limitDetails?.ExistingPiChart[i].LimitTotalValue)/limitDetails?.ExistingPiChart[i].LimitTotalValue )* 100}} % 
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mt-2 py-2 border-top">
+                                <div class="col-lg-5 col-md-5 col-sm-5 col-5">
+                                    <div class="px-2"> <span class="font-weight-light">Total</span></div>
+                                   
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-4">
+                                    <div class="d-flex justify-content-center"> <span class="font-weight-light text-secondary">Total Change</span></div>
+                                </div>
+                            </div>
+                            
+                            <div class="row ">
+                                <div class="col-lg-5 col-md-5 col-sm-5 col-5">
+                                    <div class="px-2"> 
+                                        <span class="font-weight-bold" style=" font-weight: bold; font-size: 15px;"> 
+                                            {{limitDetails?.TotalofRLV  | currency:'INR'}} 
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-4">
+                                    <div class="d-flex justify-content-center">  
+                                        <span class="font-weight-bold" style=" font-weight: bold; font-size: 15px;">
+                                            {{limitDetails?.Totadrel  | currency:'INR'}} 
+                                        </span>
+                                    </div>
+                                </div>
+                            </div> -->
+
+                            <div class="limitDetailTable">
+                                <table class="table">
+                                    <tbody>
+                                        <tr class="limitDetailTabelHead">
+                                            <td>
+                                                <p>
+                                                    <!-- Open Limit -->
+                                                </p>
+                                            </td>
+                                            <td>
+                                                <p>
+                                                    Change Value
+                                                </p>
+                                            </td>
+                                            <td>
+                                                <p>
+                                                    Change %
+                                                </p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="3" class="p-0">
+                                                <table class="table mb-0 tableBorderBottom">
+                                                    <tbody *ngFor="let item of limitDetails?.RevisedPiChart; let i=index">
+                                                        <tr class="limitDetailTr">
+                                                            <td>
+                                                                <div class="limitDotRupDetail justify-content-start">
+                                                                    <div class="limitRupDot" [ngStyle]="{'background':'' + item?.colorcode + '' }"></div>
+                                                                    <div class="limitRupDetail text-left">
+                                                                        <h4>
+                                                                            &#8377;   {{item?.LimitTotalValue.toLocaleString('en-IN')}}
+                                                                        </h4>
+                                                                        <p>
+                                                                            {{item?.LimitDescription}}
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="limitDotRupDetail">
+                                                                    <div class="limitRupDetail">
+                                                                        <h4 *ngIf="isAbc(item?.DifferenceValue) < 100000 ">
+                                                                            {{isAbc(item?.DifferenceValue).toLocaleString('en-IN')}}
+                                                                        </h4>
+                                                                        <h4 *ngIf="isAbc(item?.DifferenceValue) >= 100000 ">
+                                                                            {{numDifferentiation(item?.DifferenceValue ) }}
+                                                                        </h4>
+                                                                    </div>
+                                                                    <div class="limitRupDot" *ngIf="item?.DifferenceValue < 0 ">
+                                                                        <img src="../../../../../assets/image/down.svg">
+                                                                    </div>
+                                                                    <div class="limitRupDot" *ngIf="item?.DifferenceValue > 0 ">
+                                                                        <img src="../../../../../assets/image/up.svg">
+                                                                    </div>
+                                                                   
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="limitDotRupDetail">
+                                                                    <div class="limitRupDetail">
+                                                                        <h4>
+                                                                            {{(((item?.LimitTotalValue - limitDetails?.ExistingPiChart[i].LimitTotalValue)/limitDetails?.ExistingPiChart[i].LimitTotalValue )* 100).toFixed(2)}} %
+                                                                        </h4>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        <tr class="limitDetailTr">
+                                            <td>
+                                                <div class="limitDotRupDetail justify-content-start">
+                                                    <div class="limitRupDot"></div>
+                                                    <div class="limitRupDetail text-left">
+                                                        <p class="pb-6">Total</p>
+                                                        <h4>
+                                                            &#8377; {{limitDetails?.TotalofRLV.toLocaleString('en-IN')}} 
+                                                        </h4>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="limitDotRupDetail text-left">
+                                                    <div class="limitRupDetail">
+                                                        <p class="pb-6">Total Change</p>
+                                                        <h4 *ngIf="isAbc(limitDetails?.Totadrel) < 100000 ">
+                                                            {{isAbc(limitDetails?.Totadrel).toLocaleString('en-IN')}}
+                                                            <img  *ngIf="limitDetails?.Totadrel < 0 " src="../../../../../assets/image/down.svg">
+                                                            <img  *ngIf="limitDetails?.Totadrel > 0 " src="../../../../../assets/image/up.svg">
+                                                        </h4>
+                                                        <h4 *ngIf="isAbc(limitDetails?.Totadrel) >= 100000 ">
+                                                            {{numDifferentiation(limitDetails?.Totadrel) }}
+                                                            <img  *ngIf="limitDetails?.Totadrel < 0 " src="../../../../../assets/image/down.svg">
+                                                            <img  *ngIf="limitDetails?.Totadrel > 0 " src="../../../../../assets/image/up.svg">
+                                                        </h4>
+                                                        <!-- <h4>
+                                                            {{limitDetails?.Totadrel  | currency:'INR'}} 
+                                                            <img src="../../../../../assets/image/up.svg">
+                                                        </h4> -->
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-12 col-sm-12 col-12 pageCardHeaderLeft">
+                <div class="pageCardHeader">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                            <div class="cardHeaderRight text-left">
+                                <h4>
+                                    Sales Capacity(₹)
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pageCardBody">
+                    <div class="salesCapacityContainer mb-20">
+                        <div class="salesCapacityHeader">
+                            <p>
+                                Basic Avg. AR Days
+                            </p>
+                        </div>
+                        <div class="salesCapacityBody">
+                            <table class="salesCapacityTable">
+                                <tbody>
+                                    <tr>
+                                        <td>Days</td>
+                                        <td>
+                                            <span>{{limitDetails?.BasicAvgARDays}}</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Value</td>
+                                        <td>&#8377;{{limitDetails?.BasicAvgARValue.toLocaleString('en-IN')}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="salesCapacityContainer">
+                        <div class="salesCapacityHeader">
+                            <p>
+                                Basic Payment Term
+                            </p>
+                        </div>
+                        <div class="salesCapacityBody">
+                            <table class="salesCapacityTable">
+                                <tbody>
+                                    <tr>
+                                        <td>Days</td>
+                                        <td>
+                                            <span>{{limitDetails?.BasisPaymentTermDays}}</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Value</td>
+                                        <td>&#8377;{{limitDetails?.BasicPaymentTermValue.toLocaleString('en-IN')}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="pageData mb-20 p-0 br-5">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="pageCardHeader">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                            <div class="cardHeaderLeft">
+                                <h4>
+                                    Current Limit
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pageCardBody">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                            <div class="mainTable2">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Limit Type</th>
+                                            <th>Agency</th>
+                                            <th>Limit <br>Ref No</th>
+                                            <th>Limit <br>(INR)</th>
+                                            <th>Requested <br>(INR)</th>
+                                            <th>Valid Form</th>
+                                            <th>Valid Till</th>
+                                            <th>Requested <br>From</th>
+                                            <th>Requested <br>Till</th>
+                                            <th>Last Revision</th>
+                                            <th>Last Revision <br>Status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr  *ngFor="let item of currentLimit; let i=index">
+                                            <td>{{item?.LimitType}}</td>
+                                            <td>{{item?.Agency}}</td>
+                                            <td>{{item?.LimitReferenceNumber}}</td>
+                                            <td>{{item?.Limit.toLocaleString('en-IN') }}</td>
+                                            <td>{{item?.Requested.toLocaleString('en-IN')}}</td>
+                                            <td>{{item?.ValidFrom | date: 'dd/MM/yyyy'}}</td>
+                                            <td>{{item?.ValidTill | date: 'dd/MM/yyyy'}}</td>
+                                            <td>{{item?.RequestedFrom | date: 'dd/MM/yyyy'}}</td>
+                                            <td>{{item?.RequestedTill | date: 'dd/MM/yyyy'}}</td>
+                                            <td>{{item?.LastRevisionAgo }}</td>
+                                            <td>
+                                                <!-- <span class="tableApproved">
+                                                    {{item?.LastRevisionStatus}}
+                                                </span> -->
+                                                <span class="tableApproved" *ngIf="item?.LastRevisionStatus == 'Approved'" style="color: green;">
+                                                    {{item?.LastRevisionStatus}}
+                                                  </span>
+                                                  <span  class="tableApproved" *ngIf="item?.LastRevisionStatus == 'Decline'" style="color: red;">
+                                                      {{item?.LastRevisionStatus}}
+                                                    </span>
+                                                    <span  class="tableApproved" *ngIf="item?.LastRevisionStatus == 'Pending'" style="color: #c9c906;">
+                                                      {{item?.LastRevisionStatus}}
+                                                    </span>
+                                            </td>
+                                            <td>
+                                                <span class="tableEditIcon">
+                                                    <img src="../../../../../assets/image/edit.svg">
+                                                </span>
+                                                <span class="tableEditIcon ml-5">
+                                                    <img src="../../../../../assets/image/delete-icon-red.svg">
+                                                </span>
+                                            </td>
+                                        </tr>
+                                        <!-- <tr>
+                                            <td>BG</td>
+                                            <td>AXIS</td>
+                                            <td>BG00235</td>
+                                            <td>1,500,000</td>
+                                            <td>1,000,000</td>
+                                            <td>1/8/2022</td>
+                                            <td>30/9/22</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td>1 Month Ago</td>
+                                            <td>
+                                                <span class="tableApproved">
+                                                    Approved
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <span class="tableEditIcon">
+                                                    <img src="../../../../../assets/image/edit.svg">
+                                                </span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Insurance</td>
+                                            <td>Ksure</td>
+                                            <td>CF0023</td>
+                                            <td>1,500,000</td>
+                                            <td>1,000,000</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td>1/8/2022</td>
+                                            <td>30/9/22</td>
+                                            <td>1 Month Ago</td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Insurance</td>
+                                            <td>Ksure</td>
+                                            <td>CF0023</td>
+                                            <td>1,500,000</td>
+                                            <td>1,000,000</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td>1/8/2022</td>
+                                            <td>30/9/22</td>
+                                            <td>1 Month Ago</td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr> -->
+                                        <tr class="tableLastTd">
+                                            <td colspan="3">Total</td>
+                                            <td>{{totalLimit.toLocaleString('en-IN')}}</td>
+                                            <td>{{totalRequest.toLocaleString('en-IN')}}</td>
+                                            <td colspan="7">
+                                                <button type="button" class="btn tableWhiteBtn" (click)="openModel()">
+                                                    Add Limit
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="pageData mb-20 p-0 br-5" *ngIf="limitReqData.length > 0">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="pageCardHeader">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                            <div class="cardHeaderLeft">
+                                <h4>
+                                    Limit Requests
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pageCardBody">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                            <div class="mainTable2">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Limit Type</th>
+                                            <th>Existing Limit</th>
+                                            <th>Requested Limit</th>
+                                            <th>Change</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let item of limitReqData; let i=index">
+                                            <td>{{item?.LimitTypeName}}</td>
+                                            <td>{{item?.ExistingLimit}}</td>
+                                            <td>{{item?.RequestedAmount.toLocaleString('en-IN')}}</td>
+                                            <td>{{item?.Change.toLocaleString('en-IN')}}</td>
+                                            <td>
+                                                <span class="tableEditIcon" (click)="editLimit(item)">
+                                                    <img src="../../../../../assets/image/edit.svg">
+                                                </span>
+                                                <span class="tableEditIcon ml-5" (click)="removeLimit(item)">
+                                                    <img src="../../../../../assets/image/delete-icon-red.svg">
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    
+                                    </tbody>
+                                </table> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="pageData mb-20 p-0 br-5">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="pageCardHeader">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                            <div class="cardHeaderLeft">
+                                <h4>
+                                    Sales
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pageCardBody">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-12 col-sm-12 col-12">
+                            <div class="salesSubHeader">
+                                <h2> Sell-In</h2>
+                            </div>
+                            <app-twobarchart chartData="{{sellIn}}"></app-twobarchart>
+                        </div>
+                        <div class="col-lg-6 col-md-12 col-sm-12 col-12 mt-mobile-99120">
+                            <div class="salesSubHeader">
+                                <h2>Sell-Out</h2>
+                            </div>
+                            <app-twobarchart chartData="{{sellOut}}"></app-twobarchart>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                            <form>
+                                <label class="form-label">Remarks</label>
+                                <textarea class="form-control" rows="2" ></textarea>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 col-md-12 col-sm-12 col-12">
+                            <div class="pageData mb-20 mt-20 p-0 br-5">
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                                        <div class="pageCardHeader">
+                                            <div class="row">
+                                                <div class="col-lg-4 col-md-4 col-sm-4 col-12">
+                                                    <div class="cardHeaderLeft">
+                                                        <h4>
+                                                            WOS
+                                                        </h4>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-8 col-md-8 col-sm-8 col-12">
+                                                    <div class="cardHeaderRight">
+                                                        <button type="" class="btn boxHeaderBtn">
+                                                            Last 8 Weeks (Avg)
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="pageCardBody">
+                                            <div class="row">
+                                                <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                                                    <app-lineandbar chartData="{{wOS}}" ></app-lineandbar>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                                <form>
+                                    <label class="form-label">Remarks</label>
+                                    <textarea class="form-control" rows="2" readonly></textarea>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-12 col-sm-12 col-12">
+                            <div class="pageData mb-20 mt-20 p-0 br-5">
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                                        <div class="pageCardHeader">
+                                            <div class="row">
+                                                <div class="col-lg-4 col-md-4 col-sm-4 col-12">
+                                                    <div class="cardHeaderLeft">
+                                                        <h4>
+                                                            Billing Trends
+                                                        </h4>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-8 col-md-8 col-sm-8 col-12">
+                                                    <div class="cardHeaderRight">
+                                                        <button type="" class="btn boxHeaderBtn">
+                                                            Last 12 Months (Avg)
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="pageCardBody">
+                                            <div class="row">
+                                                <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                                                  <app-linechart chartData="{{billingTrends}}"></app-linechart>  
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                                <form>
+                                    <label class="form-label">Remarks</label>
+                                    <textarea class="form-control" rows="2" readonly></textarea>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="pageData mb-20 p-0 br-5">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="pageCardHeader">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                            <div class="cardHeaderLeft">
+                                <h4>
+                                    Investment &  Utilization
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pageCardBody">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                            <p class="chartTitle">Partner Investment ({{partnerInvestmentPreviousYear?.Year}})</p>
+                            <div class="themeChartContainer">
+                                <app-partnerinvestment chartData="{{PartnerInvestmentPreviousYear}}"></app-partnerinvestment>
+                                <!-- <app-lineandbarwithoneyaxis chartData="{{PartnerInvestmentPreviousYear}}" ></app-lineandbarwithoneyaxis> -->
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                            <p class="chartTitle">Partner Investment ({{partnerInvestmentCurrentYear?.Year}})</p>
+                            <div class="themeChartContainer">
+                                <app-partnerinvestment chartData="{{PartnerInvestmentCurrentYear}}"></app-partnerinvestment>
+                                <!-- <app-lineandbarwithoneyaxis></app-lineandbarwithoneyaxis> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                            <form>
+                                <label class="form-label">Remarks</label>
+                                <textarea class="form-control" rows="2" readonly></textarea>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 col-md-12 col-sm-12 col-12">
+                            <div class="pageData mb-20 mt-20 p-0 br-5">
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                                        <div class="pageCardHeader">
+                                            <div class="row">
+                                                <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                                                    <div class="cardHeaderLeft">
+                                                        <h4>
+                                                            Sales Capacity Vs Sales Forecast 
+                                                        </h4>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="pageCardBody">
+                                            <div class="row">
+                                                <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                                                    <div class="themeChartContainer">
+                                                        <app-twolineandonebar chartData="{{salesCapacityForecast}}"  salesCAR="{{limitDetails?.BasicAvgARValue}}"  salesCPay="{{limitDetails?.BasicPaymentTermValue}}" ></app-twolineandonebar>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                                <form>
+                                    <label class="form-label">Remarks</label>
+                                    <textarea class="form-control" rows="2" readonly></textarea>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-12 col-sm-12 col-12">
+                            <div class="pageData mb-20 mt-20 p-0 br-5">
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                                        <div class="pageCardHeader">
+                                            <div class="row">
+                                                <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                                                    <div class="cardHeaderLeft">
+                                                        <h4>
+                                                            Credit Limit Utilization
+                                                        </h4>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="pageCardBody">
+                                            <div class="row">
+                                                <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                                                    <div class="themeChartContainer">
+                                                       <app-creditlimit-chart  chartData="{{LimitUtilization}}"></app-creditlimit-chart>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                                <form>
+                                    <label class="form-label">Remarks</label>
+                                    <textarea class="form-control" rows="2" readonly></textarea>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="pageData mb-20 p-0 br-5">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="pageCardHeader">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                            <div class="cardHeaderLeft">
+                                <h4>
+                                    SECS & Compliance
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pageCardBody">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-12 col-sm-12 col-12">
+                            <div class="pageData h-nm-100 p-0 br-5">
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                                        <div class="pageCardHeader">
+                                            <div class="row">
+                                                <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                                                    <div class="cardHeaderLeft">
+                                                        <h4 class="innerBoxTitle">
+                                                            <div class="d-flex justify-content-between">
+                                                                <span>  SECS Evaluation</span>
+                                                                <span>    {{SCESEvaluation?.TotalScore}} <span class="text-muted">(Out of {{SCESEvaluation?.OutOfTotal}})</span></span>
+                                                            </div>
+                                                          
+                                                        </h4>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="pageCardBody p-0">
+                                            <div class="innerBorderBox">
+                                                <div class="row">
+                                                    <div class="col-lg-7 col-md-7 col-sm-7 col-12">
+                                                        <div class="innerStripdBox">
+                                                            <p>
+                                                                SECS Evaluation Set Type
+                                                            </p>
+                                                            <p class="textRed m-0">
+                                                               {{SCESEvaluation?.SCESEvaluationType}}
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-5 col-md-5 col-sm-5 col-12">
+                                                        <div class="innerStripdBox">
+                                                            <p>
+                                                                SECS Rating
+                                                            </p>
+                                                            <p class="textRed m-0">
+                                                                {{SCESEvaluation?.SCESCreditRating}}
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="innerBorderBox">
+                                                <div class="row">
+                                                    <div class="col-lg-7 col-md-7 col-sm-7 col-12">
+                                                        <div class="innerStripdBox">
+                                                            <p>
+                                                                Ext Credit Rating
+                                                            </p>
+                                                            <p class="textBlack m-0">
+                                                                {{SCESEvaluation?.ExtCreditRating}}
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-5 col-md-5 col-sm-5 col-12">
+                                                        <div class="innerStripdBox">
+                                                            <p>
+                                                                Last Fs Update
+                                                            </p>
+                                                            <p class="textBlack m-0">
+                                                                <!-- {{SCESEvaluation?.ExtCreditRating}} -->
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="innerBorderBox">
+                                                <div class="row">
+                                                    <div class="col-lg-7 col-md-7 col-sm-7 col-12">
+                                                        <div class="innerStripdBox">
+                                                            <p>
+                                                                Shareholder Equity (INR Lacs)
+                                                            </p>
+                                                            <p class="textBlack m-0">
+                                                                {{SCESEvaluation?.ShareHolderEquity}}
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-5 col-md-5 col-sm-5 col-12">
+                                                        <div class="innerStripdBox">
+                                                            <p>
+                                                                External Rating
+                                                            </p>
+                                                            <p class="textBlack m-0">
+                                                                {{SCESEvaluation?.Externalrating}}
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="innerBorderBox">
+                                                <div class="row">
+                                                    <div class="col-lg-7 col-md-7 col-sm-7 col-12">
+                                                        <div class="innerStripdBox">
+                                                            <p>
+                                                                Financial Status
+                                                            </p>
+                                                            <p class="textBlack m-0">
+                                                                {{SCESEvaluation?.FinancialStatus}} (Out of {{SCESEvaluation?.OutOfFinancialStatus}})
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-5 col-md-5 col-sm-5 col-12">
+                                                        <div class="innerStripdBox">
+                                                            <p>
+                                                                In House Info
+                                                            </p>
+                                                            <p class="textBlack m-0">
+                                                                {{SCESEvaluation?.Inhouseinformation}} (Out of {{SCESEvaluation?.OutOfInHouse}} )
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="innerBorderBox border-0">
+                                                <div class="row">
+                                                    <div class="col-lg-7 col-md-7 col-sm-7 col-12">
+                                                        <div class="innerStripdBox">
+                                                            <p>
+                                                                Qualitative Info
+                                                            </p>
+                                                            <p class="textBlack m-0">
+                                                                {{SCESEvaluation?.QualitativeInformation}}  (Out of  {{SCESEvaluation?.OutOfQualitative}} )
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-12 col-sm-12 col-12">
+                            <div class="pageData h-nm-100 p-0 br-5 mt-991-20">
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                                        <div class="pageCardHeader">
+                                            <div class="row">
+                                                <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                                                    <div class="cardHeaderLeft">
+                                                        <h4 class="innerBoxTitle">
+                                                            Compliance
+                                                        </h4>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="pageCardBody p-0">
+                                            <div class="row">
+                                                <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                                                    <div class="innerBorderBox">
+                                                        <div class="row">
+                                                            <div class="col-lg-7 col-md-7 col-sm-7 col-12">
+                                                                <div class="innerStripdBox">
+                                                                    <p>
+                                                                        Sales Agreement
+                                                                    </p>
+                                                                    <p class="textRed m-0">
+                                                                      {{SCESEvaluation?.SalesAgreement}}
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-5 col-md-5 col-sm-5 col-12">
+                                                                <div class="innerStripdBox">
+                                                                    <p>
+                                                                        P&G
+                                                                    </p>
+                                                                    <p class="textRed m-0">
+                                                                        Year  {{SCESEvaluation?.PG}}
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="innerBorderBox">
+                                                        <div class="row">
+                                                            <div class="col-lg-7 col-md-7 col-sm-7 col-12">
+                                                                <div class="innerStripdBox">
+                                                                    <p>
+                                                                        AR Rec
+                                                                    </p>
+                                                                    <p class="textBlack m-0">
+                                                                        Last Updated {{SCESEvaluation?.ARRec | date: 'MMM d, y'}}
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-5 col-md-5 col-sm-5 col-12">
+                                                                <div class="innerStripdBox">
+                                                                    <p>
+                                                                        Net Differance
+                                                                    </p>
+                                                                    <p class="textBlack m-0">
+                                                                        {{SCESEvaluation?.NetDifference}} Lac.
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="innerBorderBox" >
+                                                        <div class="row">
+                                                            <div class="col-lg-7 col-md-7 col-sm-7 col-12">
+                                                                <div class="innerStripdBox" >
+                                                                    <p>
+                                                                        Master Cheque
+                                                                    </p>
+                                                                    <p class="textBlack m-0" >
+                                                                        {{SCESEvaluation?.MasterCheque ? SCESEvaluation?.MasterCheque : 'Not Available' }}
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="pageData mb-20 p-0 br-5">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="pageCardHeader">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                            <div class="cardHeaderLeft">
+                                <h4>
+                                    AR Trends
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pageCardBody">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-12 mb-20">
+                            <div class="mainTable2">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th colspan="2"></th>
+                                            <th class="text-center tableBorderRight tableBorderLeft">JAN</th>
+                                            <th class="text-center">FEB</th>
+                                            <th class="text-center tableBorderLeft">MAR</th>
+                                            <th class="text-center tableBorderLeft">APR</th>
+                                            <th class="text-center tableBorderLeft">MAY</th>
+                                            <th class="text-center tableBorderLeft">JUN</th>
+                                            <th class="text-center tableBorderLeft">JUL</th>
+                                            <th class="text-center tableBorderLeft">AUG</th>
+                                            <th class="text-center tableBorderLeft">SEP</th>
+                                            <th class="text-center tableBorderLeft">OCT</th>
+                                            <th class="text-center tableBorderLeft">NOV</th>
+                                            <th class="text-center tableBorderLeft">DEC</th>
+                                        </tr>
+                                        <tr>
+                                            <th class="pt-0">YTD Sales <br>(INR Lacs)</th>
+                                            <th class="pt-0">Year wise <br>Ageing</th>
+                                            <th class="p-0 secondTh tableBorderRight tableBorderLeft">
+                                                <table>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>16-31</td>
+                                                            <td>>31</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </th>
+                                            <th class="p-0 secondTh tableBorderLeft">
+                                                <table>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>16-31</td>
+                                                            <td>>31</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </th>
+                                            <th class="p-0 secondTh tableBorderLeft">
+                                                <table>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>16-31</td>
+                                                            <td>>31</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </th>
+                                            <th class="p-0 secondTh tableBorderLeft">
+                                                <table>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>16-31</td>
+                                                            <td>>31</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </th>
+                                            <th class="p-0 secondTh tableBorderLeft">
+                                                <table>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>16-31</td>
+                                                            <td>>31</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </th>
+                                            <th class="p-0 secondTh tableBorderLeft">
+                                                <table>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>16-31</td>
+                                                            <td>>31</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </th>
+                                            <th class="p-0 secondTh tableBorderLeft">
+                                                <table>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>16-31</td>
+                                                            <td>>31</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </th>
+                                            <th class="p-0 secondTh tableBorderLeft">
+                                                <table>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>16-31</td>
+                                                            <td>>31</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </th>
+                                            <th class="p-0 secondTh tableBorderLeft">
+                                                <table>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>16-31</td>
+                                                            <td>>31</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </th>
+                                            <th class="p-0 secondTh tableBorderLeft">
+                                                <table>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>16-31</td>
+                                                            <td>>31</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </th>
+                                            <th class="p-0 secondTh tableBorderLeft">
+                                                <table>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>16-31</td>
+                                                            <td>>31</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </th>
+                                            <th class="p-0 secondTh tableBorderLeft">
+                                                <table>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>16-31</td>
+                                                            <td>>31</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr  *ngFor="let item of aRTrends; let i=index">
+                                            <td>{{item?.TOTAL}}</td>
+                                            <td>{{item?.Years}}</td>
+                                            <td class="tableBorderLeft tableBorderRight arTrendsTdPadding"><div class="d-flex justify-content-between"><span>{{item?.Jan_16_31}}</span> <span>{{item?.Jan_Over31}}</span> </div></td>
+                                            <td class="arTrendsTdPadding"><div class="d-flex justify-content-between"><span>{{item?.Feb_16_31}}</span> <span>{{item?.Feb_Over31}}</span> </div></td>
+                                            <td class="tableBorderLeft arTrendsTdPadding"><div class="d-flex justify-content-between"><span>{{item?.March_16_31}}</span> <span>{{item?.March_16_31}}</span> </div> </td>
+                                            <td class="tableBorderLeft arTrendsTdPadding"><div class="d-flex justify-content-between"><span>{{item?.April_16_31}}</span> <span>{{item?.April_Over31}}</span> </div></td>
+                                            <td class="tableBorderLeft arTrendsTdPadding"><div class="d-flex justify-content-between"><span>{{item?.May_16_31}}</span> <span>{{item?.May_Over31}}</span> </div></td>
+                                            <td class="tableBorderLeft arTrendsTdPadding"><div class="d-flex justify-content-between"><span>{{item?.June_16_31}}</span> <span>{{item?.June_Over31}}</span> </div></td>
+                                            <td class="tableBorderLeft arTrendsTdPadding"><div class="d-flex justify-content-between"><span>{{item?.July_16_31}}</span> <span>{{item?.July_Over31}}</span> </div></td>
+                                            <td class="tableBorderLeft arTrendsTdPadding"><div class="d-flex justify-content-between"><span>{{item?.Aug_16_31}}</span> <span>{{item?.Aug_Over31}}</span> </div></td>
+                                            <td class="tableBorderLeft arTrendsTdPadding"><div class="d-flex justify-content-between"><span>{{item?.Sept_16_31}}</span> <span>{{item?.Sept_Over31}}</span> </div></td>
+                                            <td class="tableBorderLeft arTrendsTdPadding"><div class="d-flex justify-content-between"><span>{{item?.Oct_16_31}}</span> <span>{{item?.Oct_Over31}}</span> </div></td>
+                                            <td class="tableBorderLeft arTrendsTdPadding"><div class="d-flex justify-content-between"><span>{{item?.Nov_16_31}}</span> <span>{{item?.Nov_Over31}}</span> </div></td>
+                                            <td class="tableBorderLeft arTrendsTdPadding"><div class="d-flex justify-content-between"><span class="arTrendsLastTd">{{item?.Dec_16_31}}</span> <span class="arTrendsLastTd">{{item?.Dec_Over31}}</span> </div></td>
+                                        </tr>
+                                   
+                                    </tbody>
+                                </table> 
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                            <form>
+                                <label class="form-label">Remarks</label>
+                                <textarea class="form-control" rows="2" readonly></textarea>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="pageData mb-20 p-0 br-5">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="pageCardHeader">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                            <div class="cardHeaderLeft">
+                                <h4>
+                                    Add Approver
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pageCardBody">
+                    <div class="row mb-20">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                            <form class="userApproverForm">
+                                <input type="text" placeholder="Please add approver name" (window:keypress)="addaproverlist($event)" [formControl]="control" [matAutocomplete]="auto">
+                                <img src="../../../../../assets/image/search-icon.svg"  >
+                                <mat-autocomplete #auto="matAutocomplete">
+                                  <mat-option *ngFor="let approverSugg of filtereduserApprover | async" [value]="approverSugg">
+                                    {{approverSugg}}
+                                  </mat-option>
+                                </mat-autocomplete>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+
+                            
+
+                            <div class="searchUserList" *ngFor="let aproverList of approversList">
+
+                                <div class="row align-items-center">
+                                    <div class="col-lg-2 col-md-6 col-sm-6 col-12">
+                                        <p class="searchUserName">
+                                            {{aproverList.name}}
+                                        </p>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                                        <p class="searchUserEmail">
+                                            {{aproverList.email}}
+                                        </p>
+                                    </div>
+                                    <div class="col-lg-7 col-md-12 col-sm-12 col-12">
+                                        <div class="searchUserBtn">
+                                            <div class="buttonContainer mr-10">
+                                                <a>
+                                                    <button type="button" class="btn outlineBtn">
+                                                        <img src="../../../../../assets/image/approve-icon.svg" class="pr-6 blackIcon">
+                                                        <img src="../../../../../assets/image/approve-hover-icon.svg" class="pr-6 greenIcon">
+                                                        Approver
+                                                    </button>
+                                                </a>
+                                            </div>
+                                            <div class="buttonContainer">
+                                                <a>
+                                                    <button type="button" class="btn">
+                                                        <img src="../../../../../assets/image/noti-icon.svg" class="pr-6 notiWhiteIcon">
+                                                        <img src="../../../../../assets/image/noti-hover-icon.svg" class="pr-6 notiBlackIcon">
+                                                        Notify
+                                                    </button>
+                                                </a>
+                                            </div>
+                                            <div class="searchUserCloseIcon ml-10">
+                                                <img src="../../../../../assets/image/headerClose.svg">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                            <div class="text-right mt-20">
+                                <div class="buttonContainer">
+                                    <a>
+                                        <button type="button" class="btn"  (click)="submitAprover()">
+                                            Submit
+                                        </button>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+ </div>
+<div  *ngIf="!partnerDetail">
+    <div  class="alert alert-warning py-3 my-5" >
+      {{message}}
+      </div>
+</div>

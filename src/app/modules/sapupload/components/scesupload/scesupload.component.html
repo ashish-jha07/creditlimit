@@ -1,0 +1,76 @@
+<div class="wrapper">
+    <div class="pageBreadcreumbTitle">
+        <div class="breadcrumbContainer">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a routerLink="/home/welcome">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">SAP Upload</li>
+                </ol>
+            </nav>
+        </div>
+        <div class="pageTitle">
+            <h1>SCES Upload</h1>
+        </div>
+
+    </div>
+    <div class="pageData">
+        <div class="row">
+            <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                <div class="pageInnerTitle">
+
+                </div>
+                <div class="sapBorderBox ">
+                    <div class="pageInnerTitle">
+                        <h3><span>SCES Upload</span></h3>
+                    </div>
+
+                    <div class="buttonContainer">
+                        <button type="button" class="btn btn-dark" (click)="gitsapdownload()">Download</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+
+                <div class="sapBorderBox">
+                    <form [formGroup]="reqForm">
+                        <div class="row g-4" formArrayName="partnerIds">
+                        <div class="col-auto" *ngFor="let partnerId of partnerIds.controls; let i=index">
+                            <label class="mb-10" for="partnerId-{{ i }}">Enter a partner code</label>
+                            <input type="text"  id="partnerId-{{ i }}" placeholder="Enter a partner code" [formControlName]="i" class="form-control themeTextInput" autocomplete="off">
+                            <div class="invalid-feedback" style="display:block;" *ngIf=" submit && partnerIds.controls[i].invalid">
+                             <span *ngIf="partnerIds.controls[i].errors?.['required']">   Please enter partner code.</span>
+                              </div>
+
+                        </div>
+                        <div class="col-auto buttonContainer pt-4 ">
+                            <button type="button" class="btn" (click)="raiseAreq()">
+                                Search
+                            </button>
+                        </div>
+                    </div>
+                     
+                    </form>
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <div class="d-flex justify-content-end buttonContainer">  <button type="button" class="btn btn-dark mt-3">Download Report</button></div>
+        <div class="themeSubTabs" *ngIf="requestarray.length > 0">
+    
+            <div *ngFor="let item of requestarray; let i=index">
+                <div *ngIf="currentTab == 'partner'+i">
+                    <!-- <app-downloadreportdetails partnerCode="{{item}}"></app-downloadreportdetails> -->
+ 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

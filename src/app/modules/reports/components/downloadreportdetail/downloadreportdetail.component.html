@@ -1,0 +1,1410 @@
+<div class="d-flex justify-content-end mb-2">
+    <button type="button" class="btn btn-dark" (click)="downloadpdf()" >Download Report</button>
+</div>
+<!-- (click)="downloadpdf()" -->
+<ul class="nav">
+    <li class="nav-item" >
+      <a class="nav-link active" aria-current="page" href="javascript:void(0)" >Partner Performance Report</a>
+    </li>
+</ul>
+<div  *ngIf="partnerDetail" [formGroup]="submitFormdata" id="pdfTable" #pdfTable> 
+  
+    <div class="pageData mt-20 p-0 br-5">
+        <div class="pageCardHeader">
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-12">
+                    <div class="cardHeaderLeft">
+                        <h4>
+                            <span>1 A</span> Partner Details
+                        </h4>
+                    </div>
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-8 col-12 d-flex align-items-center">
+                    <div class="cardHeaderRight">
+                        <p>
+                            Last Request Raised on :
+                            <span>{{ partnerDetail?.LastRequestRaised| date: 'dd, MMM yyyy' }} ({{ partnerDetail?.timeago}})</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="pageCardBody">
+            <div class="row">
+                <div class="col-lg-2 col-md-6 col-sm-6 col-12 borderRight">
+                    <div class="partnerDetails">
+                        <p>
+                            <span>
+                                {{partnerDetail?.PartnerName}}  ({{partnerDetail?.PartnerCode}})
+                            </span>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 col-12 borderRight">
+                    <div class="partnerDetails">
+                        <p>
+                            Branch :
+                            <span>
+                                {{partnerDetail?.BranchName}}
+                            </span>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 col-sm-6 col-12 borderRight">
+                    <div class="partnerDetails">
+                        <p>
+                            Type :
+                            <span>
+                                {{partnerDetail?.Type}}
+                            </span>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 col-sm-6 col-12 borderRight">
+                    <div class="partnerDetails">
+                        <p>
+                            Partner since :
+                            <span>
+                                {{partnerDetail?.PartnerSince | date:'MMM, yyyy'}}
+                            </span>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 col-sm-6 col-12 borderRight">
+                    <div class="partnerDetails">
+                        <p>
+                            CD on invoice :
+                            <span>
+                               {{partnerDetail?.CDonInvoice}}
+                            </span>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-8 col-md-12 col-sm-12 col-12 borderRight mb-0 mOrder1">
+                    <div class="partnerDetailSold">
+                        <div class="innerBorderRight active">
+                            <div class="partnerDetails">
+                                <p>
+                                    <span>
+                                        Sold to code
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="innerBorderRight">
+                            <div class="partnerDetails">
+                                <p>
+                                    <span>
+                                     Count: {{ '('+partnerDetail?.SoldToCodeCount+')'}}
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="innerBorderRight"  *ngFor="let item of partnerDetail?.SoldToCode; let i=index">
+                            <div class="partnerDetails">
+                                <p>
+                                    <span>
+                                        {{item?.MainDivision +' '+ '('+item?.DivisionCount+')'}}
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 col-12 borderRight textAlignCenter mb-0 mOrder2">
+                    <div class="partnerDetails">
+                        <p>
+                            Last Request Status :
+                            <span *ngIf="partnerDetail?.LastRequestStatus == 'Approved'" style="color: green;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+                                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+                                  </svg> {{partnerDetail?.LastRequestStatus}}
+                            </span>
+                            <span *ngIf="partnerDetail?.LastRequestStatus == 'Decline'" style="color: red;">
+                                {{partnerDetail?.LastRequestStatus}}
+                              </span>
+                              <span *ngIf="partnerDetail?.LastRequestStatus == 'Pending'" style="color: #c9c906;">
+                                {{partnerDetail?.LastRequestStatus}}
+                              </span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="pageData p-0 br-5">
+        <div class="row">
+            <div class="col-lg-8 col-md-12 col-sm-12 col-12 pageCardHeaderRight">
+                <div class="pageCardHeader">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                            <div class="cardHeaderLeft">
+                                <h4>
+                                    <span>1 B</span> Limit Details (INR)
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pageCardBody">
+                    <div class="row align-items-center">
+                        <div class="col-lg-3 col-md-6 col-sm-6 col-12 borderRightDdd">
+                            <div class="d-flex justify-content-center align-items-center">
+                                <app-charts chartData="{{existingPiChart}}" text="Existing"></app-charts>
+                                <div class="chartInnerTxt">
+                                    <p>Total</p>
+                                    <h5>{{existingTotal}}</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-6 col-12 ">
+                            <div class="d-flex justify-content-center align-items-center">
+                                <app-charts chartData="{{revisedPiChart}}" text="Revised" update="updatechart"></app-charts>
+                                <div class="chartInnerTxt">
+                                    <p>Total</p>
+                                    <h5>{{revisedTotal}}</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-12 col-sm-12 col-12 borderRightDdd">
+                            <!-- <div class="row mb-2 pb-1 border-bottom">
+                                <div class="col-lg-5 col-md-5 col-sm-5 col-5">
+                                    <div class="px-2"> <span class="font-weight-light text-secondary">Open Limit</span></div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-4">
+                                    <div class="d-flex justify-content-center"> <span class="font-weight-light text-secondary">Change Value</span></div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-3">
+                                    <div class="d-flex justify-content-center"> <span class="font-weight-light text-secondary">Change %</span></div>
+                                </div>
+                            </div>
+                         
+                            <div class="row" *ngFor="let item of limitDetails?.RevisedPiChart; let i=index">
+                                <div class="col-lg-5 col-md-5 col-sm-5 col-5" >
+                                    <div class="row py-0 my-0">
+                                        <div class="col-lg-2 col-md-2 col-sm-2 col-2pr-0 mr-0  pt-2 my-0" >
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" [ngStyle]="{'fill': '' + item?.colorcode + '','background':'' + item?.colorcode + '','border-radius':'50%' }" fill="currentColor" class="bi bi-circle" viewBox="0 0 16 16">
+                                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                              </svg>
+                                        </div>
+                                        <div class="col-lg-10 col-md-10 col-sm-10 col-10 pl-0 py-0 my-0"  >
+                                            <span class="font-weight-bold" style="font-weight: bold; font-size: 15px;">
+                                                {{item?.LimitTotalValue  | currency:'INR'}}
+                                            </span> 
+                                            <p class="pt-1">{{item?.LimitDescription}}</p>  
+                                        </div>
+                                    </div>  
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-4">
+                                    <div class="d-flex justify-content-center">
+                                        <span class="font-weight-bold" style=" font-weight: bold; font-size: 15px;">
+                                            {{item?.DifferenceValue  | currency:'INR'}}
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-3">
+                                    <div class="d-flex justify-content-center"> 
+                                        <span  class="font-weight-bold" style=" font-weight: bold; font-size: 15px;">
+                                            {{((item?.LimitTotalValue - limitDetails?.ExistingPiChart[i].LimitTotalValue)/limitDetails?.ExistingPiChart[i].LimitTotalValue )* 100}} % 
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mt-2 py-2 border-top">
+                                <div class="col-lg-5 col-md-5 col-sm-5 col-5">
+                                    <div class="px-2"> <span class="font-weight-light">Total</span></div>
+                                   
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-4">
+                                    <div class="d-flex justify-content-center"> <span class="font-weight-light text-secondary">Total Change</span></div>
+                                </div>
+                            </div>
+                            
+                            <div class="row ">
+                                <div class="col-lg-5 col-md-5 col-sm-5 col-5">
+                                    <div class="px-2"> 
+                                        <span class="font-weight-bold" style=" font-weight: bold; font-size: 15px;"> 
+                                            {{limitDetails?.TotalofRLV  | currency:'INR'}} 
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-4">
+                                    <div class="d-flex justify-content-center">  
+                                        <span class="font-weight-bold" style=" font-weight: bold; font-size: 15px;">
+                                            {{limitDetails?.Totadrel  | currency:'INR'}} 
+                                        </span>
+                                    </div>
+                                </div>
+                            </div> -->
+
+                            <div class="limitDetailTable">
+                                <table class="table">
+                                    <tbody>
+                                        <tr class="limitDetailTabelHead">
+                                            <td>
+                                                <p>
+                                                    <!-- Open Limit -->
+                                                </p>
+                                            </td>
+                                            <td>
+                                                <p>
+                                                    Change Value
+                                                </p>
+                                            </td>
+                                            <td>
+                                                <p>
+                                                    Change %
+                                                </p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="3" class="p-0">
+                                                <table class="table mb-0 tableBorderBottom">
+                                                    <tbody *ngFor="let item of limitDetails?.RevisedPiChart; let i=index">
+                                                        <tr class="limitDetailTr">
+                                                            <td>
+                                                                <div class="limitDotRupDetail justify-content-start">
+                                                                    <div class="limitRupDot" [ngStyle]="{'background':'' + item?.colorcode + '' }"></div>
+                                                                    <div class="limitRupDetail text-left">
+                                                                        <h4>
+                                                                            &#8377;   {{item?.LimitTotalValue.toLocaleString('en-IN')}}
+                                                                        </h4>
+                                                                        <p>
+                                                                            {{item?.LimitDescription}}
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="limitDotRupDetail">
+                                                                    <div class="limitRupDetail">
+                                                                        <h4 *ngIf="isAbc(item?.DifferenceValue) < 100000 ">
+                                                                            {{isAbc(item?.DifferenceValue).toLocaleString('en-IN')}}
+                                                                        </h4>
+                                                                        <h4 *ngIf="isAbc(item?.DifferenceValue) >= 100000 ">
+                                                                            {{numDifferentiation(item?.DifferenceValue ) }}
+                                                                        </h4>
+                                                                    </div>
+                                                                    <div class="limitRupDot" *ngIf="item?.DifferenceValue < 0 ">
+                                                                        <img src="../../../../../assets/image/down.svg">
+                                                                    </div>
+                                                                    <div class="limitRupDot" *ngIf="item?.DifferenceValue > 0 ">
+                                                                        <img src="../../../../../assets/image/up.svg">
+                                                                    </div>
+                                                                   
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="limitDotRupDetail">
+                                                                    <div class="limitRupDetail">
+                                                                        <h4>
+                                                                            {{item?.Percent}} %
+                                                                        </h4>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        <tr class="limitDetailTr">
+                                            <td>
+                                                <div class="limitDotRupDetail justify-content-start">
+                                                    <div class="limitRupDot"></div>
+                                                    <div class="limitRupDetail text-left">
+                                                        <p class="pb-6">Total</p>
+                                                        <h4>
+                                                            &#8377; {{limitDetails?.TotalofRLV.toLocaleString('en-IN')}} 
+                                                        </h4>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="limitDotRupDetail text-left">
+                                                    <div class="limitRupDetail">
+                                                        <p class="pb-6">Total Change</p>
+                                                        <h4 *ngIf="isAbc(limitDetails?.Totadrel) < 100000 ">
+                                                            {{isAbc(limitDetails?.Totadrel).toLocaleString('en-IN')}}
+                                                            <img  *ngIf="limitDetails?.Totadrel < 0 " src="../../../../../assets/image/down.svg">
+                                                            <img  *ngIf="limitDetails?.Totadrel > 0 " src="../../../../../assets/image/up.svg">
+                                                        </h4>
+                                                        <h4 *ngIf="isAbc(limitDetails?.Totadrel) >= 100000 ">
+                                                            {{numDifferentiation(limitDetails?.Totadrel) }}
+                                                            <img  *ngIf="limitDetails?.Totadrel < 0 " src="../../../../../assets/image/down.svg">
+                                                            <img  *ngIf="limitDetails?.Totadrel > 0 " src="../../../../../assets/image/up.svg">
+                                                        </h4>
+                                                        <!-- <h4>
+                                                            {{limitDetails?.Totadrel  | currency:'INR'}} 
+                                                            <img src="../../../../../assets/image/up.svg">
+                                                        </h4> -->
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-12 col-sm-12 col-12 pageCardHeaderLeft">
+                <div class="pageCardHeader">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                            <div class="cardHeaderRight text-left">
+                                <h4>
+                                    Sales Capacity(₹)
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pageCardBody">
+                    <div class="salesCapacityContainer mb-20">
+                        <div class="salesCapacityHeader">
+                            <p>
+                                Basic Avg. AR Days
+                            </p>
+                        </div>
+                        <div class="salesCapacityBody">
+                            <table class="salesCapacityTable">
+                                <tbody>
+                                    <tr>
+                                        <td>Days</td>
+                                        <td>
+                                            <span>{{limitDetails?.BasicAvgARDays}}</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Value</td>
+                                        <td>&#8377;{{limitDetails?.BasicAvgARValue.toLocaleString('en-IN')}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="salesCapacityContainer">
+                        <div class="salesCapacityHeader">
+                            <p>
+                                Basic Payment Term
+                            </p>
+                        </div>
+                        <div class="salesCapacityBody">
+                            <table class="salesCapacityTable">
+                                <tbody>
+                                    <tr>
+                                        <td>Days</td>
+                                        <td>
+                                            <span>{{limitDetails?.BasisPaymentTermDays}}</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Value</td>
+                                        <td>&#8377;{{(limitDetails?.BasicPaymentTermValue).toLocaleString('en-IN')}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="pageData p-0 br-5">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="pageCardHeader">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                            <div class="cardHeaderLeft">
+                                <h4>
+                                    Current Limit
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pageCardBody">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                            <div class="mainTable2">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Limit Type</th>
+                                            <th>Agency</th>
+                                            <th>Limit <br>Ref No</th>
+                                            <th>Limit <br>(INR)</th>
+                                            <!-- <th>Requested <br>(INR)</th> -->
+                                            <th>Valid Form</th>
+                                            <th>Valid Till</th>
+                                            <th>Requested <br>From</th>
+                                            <th>Requested <br>Till</th>
+                                            <th>Last Revision</th>
+                                            <th>Last Revision <br>Status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr  *ngFor="let item of currentLimit; let i=index">
+                                            <td>{{item?.LimitTypeName}}</td>
+                                            <td>{{item?.BankName}}</td>
+                                            <td>{{item?.AccountNumber}}</td>
+                                            <td>{{item?.TotalLimit.toLocaleString('en-IN') }}</td>
+                                            <!-- <td>{{item?.Requested.toLocaleString('en-IN')}}</td> -->
+                                            <td>{{item?.HedgeValidFrom | date: 'dd/MM/yyyy'}}</td>
+                                            <td>{{item?.HedgeValidTo | date: 'dd/MM/yyyy'}}</td>
+                                            <td>{{item?.CreditLimitFrom | date: 'dd/MM/yyyy'}}</td>
+                                            <td>{{item?.CreditLimitTo | date: 'dd/MM/yyyy'}}</td>
+                                            <td>{{item?.LastRevisionAgo }}</td>
+                                            <td>
+                                                <!-- <span class="tableApproved">
+                                                    {{item?.LastRevisionStatus}}
+                                                </span> -->
+                                                <span class="tableApproved" *ngIf="item?.LastRevisionStatus == 'Approved'" style="color: green;">
+                                                    {{item?.LastRevisionStatus}}
+                                                  </span>
+                                                  <span  class="tableApproved" *ngIf="item?.LastRevisionStatus == 'Decline'" style="color: red;">
+                                                      {{item?.LastRevisionStatus}}
+                                                    </span>
+                                                    <span  class="tableApproved" *ngIf="item?.LastRevisionStatus == 'Pending'" style="color: #c9c906;">
+                                                      {{item?.LastRevisionStatus}}
+                                                    </span>
+                                            </td>
+                                            <td>
+                                                <span class="tableEditIcon">
+                                                    <img src="../../../../../assets/image/edit.svg">
+                                                </span>
+                                                <span class="tableEditIcon ml-5">
+                                                    <img src="../../../../../assets/image/delete-icon-red.svg">
+                                                </span>
+                                            </td>
+                                        </tr>
+                                        <!-- <tr>
+                                            <td>BG</td>
+                                            <td>AXIS</td>
+                                            <td>BG00235</td>
+                                            <td>1,500,000</td>
+                                            <td>1,000,000</td>
+                                            <td>1/8/2022</td>
+                                            <td>30/9/22</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td>1 Month Ago</td>
+                                            <td>
+                                                <span class="tableApproved">
+                                                    Approved
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <span class="tableEditIcon">
+                                                    <img src="../../../../../assets/image/edit.svg">
+                                                </span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Insurance</td>
+                                            <td>Ksure</td>
+                                            <td>CF0023</td>
+                                            <td>1,500,000</td>
+                                            <td>1,000,000</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td>1/8/2022</td>
+                                            <td>30/9/22</td>
+                                            <td>1 Month Ago</td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Insurance</td>
+                                            <td>Ksure</td>
+                                            <td>CF0023</td>
+                                            <td>1,500,000</td>
+                                            <td>1,000,000</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td>1/8/2022</td>
+                                            <td>30/9/22</td>
+                                            <td>1 Month Ago</td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr> -->
+                                        <tr class="tableLastTd">
+                                            <td colspan="3">Total</td>
+                                            <td>{{totalLimit?.toLocaleString('en-IN')}}</td>
+                                            <!-- <td>{{totalRequest?.toLocaleString('en-IN')}}</td> -->
+                                            <td colspan="7">
+                                                <!-- <button type="button" class="btn tableWhiteBtn" (click)="openModel()">
+                                                    Add Limit
+                                                </button> -->
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="pageData p-0 br-5">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="pageCardHeader">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                            <div class="cardHeaderLeft">
+                                <h4>
+                                    <span>1 C</span> Sales
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pageCardBody">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-12 col-sm-12 col-12">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                                    <div class="salesSubHeader">
+                                        <h2> Sell-In</h2>
+                                    </div>
+                                    <app-twobarchart chartData="{{sellIn}}"></app-twobarchart>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-12 mt-mobile-99120 graphBorderRight">
+                                    <div class="salesSubHeader">
+                                        <h2>Sell-Out</h2>
+                                    </div>
+                                    <app-twobarchart chartData="{{sellOut}}"></app-twobarchart>
+                                </div>
+                            </div>
+                            <div class="row mb-20-991" *ngIf="false">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                                    <label class="form-label">Remarks</label>
+                                    <textarea class="form-control" rows="1"  formControlName="salesRemark" ></textarea>
+                                    <div *ngIf="submitted && f?.['salesRemark']?.invalid " class="errorMessage mt-1">
+                                        <div class="text-danger" *ngIf="f?.['salesRemark']?.errors && f?.['salesRemark']?.errors?.['required']">
+                                            Sell-In/Sell-Out remark is required
+                                        </div>
+                                      </div>
+                               
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-12 col-sm-12 col-12">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                                    <div class="salesSubHeader graphHeaderRight">
+                                        <h2>WOS</h2>
+                                        <div class="cardHeaderRight">
+                                            <button type="" class="btn boxHeaderBtn border-0 p-0">
+                                                Last 8 Weeks (Avg)
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <app-lineandbar chartData="{{wOS}}" ></app-lineandbar>
+                                    <div class="mb-20-768" *ngIf="false">
+                                        <label class="form-label">Remarks</label>
+                                        <textarea class="form-control" rows="1" formControlName="wosRemark" ></textarea>
+                                        <div *ngIf="submitted && f?.['wosRemark']?.invalid " class="errorMessage mt-1">
+                                            <div class="text-danger" *ngIf="f?.['wosRemark']?.errors && f?.['wosRemark']?.errors?.['required']">
+                                                WOS remark is required
+                                            </div>
+                                          </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                                    <div class="salesSubHeader graphHeaderRight">
+                                        <h2>Billing Trends</h2>
+                                        <div class="cardHeaderRight">
+                                            <button type="" class="btn boxHeaderBtn border-0 p-0">
+                                                Last 12 Months (Avg)
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <app-linechart chartData="{{billingTrends}}"></app-linechart>  
+                                
+                                        <label class="form-label" *ngIf="false">Remarks</label>
+                                        <textarea *ngIf="false" class="form-control" rows="1"  formControlName="billingTrendRemark" ></textarea>
+                                        <!-- <div *ngIf="submitted && f?.['billingTrendRemark']?.invalid " class="errorMessage mt-1">
+                                            <div class="text-danger" *ngIf="f?.['billingTrendRemark']?.errors && f?.['billingTrendRemark']?.errors?.['required']">
+                                                Billing Trends remark is required
+                                            </div>
+                                          </div> -->
+                                 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="pageData p-0 br-5">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="pageCardHeader">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                            <div class="cardHeaderLeft">
+                                <h4>
+                                    <span>1 D</span> Investment &  Utilization
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pageCardBody">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-12 col-sm-12 col-12">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                                    <div class="salesSubHeader">
+                                        <h2>
+                                            Partner Investment ({{partnerInvestmentPreviousYear?.Year}})
+                                        </h2>
+                                    </div>
+                                    <app-partnerinvestment  chartData="{{PartnerInvestmentPreviousYear}}" ></app-partnerinvestment>
+                               </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-12 mt-mobile-99120 graphBorderRight">
+                                    <div class="salesSubHeader">
+                                        <h2>
+                                            Partner Investment ({{partnerInvestmentCurrentYear?.Year}})
+                                        </h2>
+                                    </div>
+                                    <app-partnerinvestment chartData="{{PartnerInvestmentCurrentYear}}"></app-partnerinvestment>
+                                </div>
+                            </div>
+                            <div class="row mb-20-991" *ngIf="false">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                                   
+                                        <label class="form-label">Remarks</label>
+                                        <textarea class="form-control" rows="1" formControlName="partnerInvestmentRemark"></textarea>
+                                        <div *ngIf="submitted && f?.['partnerInvestmentRemark']?.invalid " class="errorMessage mt-1">
+                                            <div class="text-danger" *ngIf="f?.['partnerInvestmentRemark']?.errors && f?.['partnerInvestmentRemark']?.errors?.['required']">
+                                                Partner Investment remark is required
+                                            </div>
+                                          </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-12 col-sm-12 col-12">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                                    <div class="salesSubHeader">
+                                        <h2>Sales Capacity Vs Sales Forecast </h2>
+                                    </div>
+                                    <app-twolineandonebar chartData="{{salesCapacityForecast}}"  salesCAR="{{limitDetails?.BasicAvgARValue}}"  salesCPay="{{limitDetails?.BasicPaymentTermValue}}" ></app-twolineandonebar>
+                                    <div class="mb-20-768" *ngIf="false">
+                                        <label class="form-label">Remarks</label>
+                                        <textarea class="form-control" rows="1" formControlName="forecastRemark"></textarea>
+                                        <div *ngIf="submitted && f?.['forecastRemark']?.invalid " class="errorMessage mt-1">
+                                            <div class="text-danger" *ngIf="f?.['forecastRemark']?.errors && f?.['forecastRemark']?.errors?.['required']">
+                                                SCSF remark is required
+                                            </div>
+                                          </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                                    <div class="salesSubHeader graphHeaderRight">
+                                        <h2>Credit Limit Utilization</h2>
+                                    </div>
+                                    <app-creditlimit-chart  chartData="{{LimitUtilization}}"></app-creditlimit-chart>  
+                               
+                                        <!-- <label class="form-label">Remarks</label>
+                                        <textarea class="form-control" rows="1" formControlName="creditLimitRemark"></textarea>
+                                        <div *ngIf="submitted && f?.['creditLimitRemark']?.invalid " class="errorMessage mt-1">
+                                            <div class="text-danger" *ngIf="f?.['creditLimitRemark']?.errors && f?.['creditLimitRemark']?.errors?.['required']">
+                                                CLU remark is required
+                                            </div>
+                                          </div> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="pageData p-0 br-5">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="pageCardHeader">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                            <div class="cardHeaderLeft">
+                                <h4>
+                                    <span>1 E</span> SCES & Compliance
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pageCardBody">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-12 col-sm-12 col-12">
+                            <div class="pageData h-nm-100 p-0 br-5">
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                                        <div class="pageCardHeader">
+                                            <div class="row">
+                                                <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                                                    <div class="cardHeaderLeft">
+                                                        <h4 class="innerBoxTitle">
+                                                            <div class="d-flex justify-content-between">
+                                                                <span>  SCES Evaluation</span>
+                                                                <span *ngIf="SCESEvaluation?.SCESEvaluationType == 0"> SCES Score: - </span>
+                                                                <span *ngIf="SCESEvaluation?.SCESEvaluationType != 0"> SCES Score: {{SCESEvaluation?.TotalScore}} <span class="text-muted">(Out of {{SCESEvaluation?.OutOfTotal}})</span></span>
+                                                            </div>
+                                                        </h4>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="pageCardBody p-0">
+                                            <div class="innerBorderBox">
+                                                <div class="row">
+                                                    <div class="col-lg-7 col-md-7 col-sm-7 col-12">
+                                                        <div class="innerStripdBox">
+                                                            <p>
+                                                                SCES Evaluation Set Type
+                                                            </p>
+                                                            <p class=" {{SCESEvaluation?.IsThresholdBreachEvaluationType? 'textRed': ''}} m-0">
+                                                               {{SCESEvaluation?.SCESEvaluationType}}
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-5 col-md-5 col-sm-5 col-12">
+                                                        <div class="innerStripdBox">
+                                                            <p>
+                                                                SCES Rating
+                                                            </p>
+                                                            <p class="{{SCESEvaluation?.IsThresholdBreachSCESCreditRating? 'textRed': ''}} m-0">
+                                                                {{SCESEvaluation?.SCESCreditRating +' '}}<span *ngIf="SCESEvaluation?.SCESCreditRatingDescription">{{SCESEvaluation?.SCESCreditRatingDescription}}</span>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="innerBorderBox">
+                                                <div class="row">
+                                                    <div class="col-lg-7 col-md-7 col-sm-7 col-12">
+                                                        <div class="innerStripdBox">
+                                                            <p>
+                                                                Ext Credit Rating
+                                                            </p>
+                                                            <p class="textBlack m-0">
+                                                                {{SCESEvaluation?.ExtCreditRating }}
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-5 col-md-5 col-sm-5 col-12">
+                                                        <div class="innerStripdBox">
+                                                            <p>
+                                                                Last Fs Update
+                                                            </p>
+                                                            <p class="textBlack m-0">
+                                                                {{SCESEvaluation?.LastFSUpdate}}
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="innerBorderBox">
+                                                <div class="row">
+                                                    <div class="col-lg-7 col-md-7 col-sm-7 col-12">
+                                                        <div class="innerStripdBox">
+                                                            <p>
+                                                                Shareholder Equity (INR Lacs)
+                                                            </p>
+                                                            <p class="textBlack m-0">
+                                                                {{SCESEvaluation?.ShareHolderEquity}}
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-5 col-md-5 col-sm-5 col-12">
+                                                        <div class="innerStripdBox">
+                                                            <p>
+                                                                External Rating
+                                                            </p>
+                                                            <p class="textBlack m-0">
+                                                                {{SCESEvaluation?.Externalrating ?? '-' }}  
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="innerBorderBox">
+                                                <div class="row">
+                                                    <div class="col-lg-7 col-md-7 col-sm-7 col-12">
+                                                        <div class="innerStripdBox">
+                                                            <p>
+                                                                Financial Status
+                                                            </p>
+                                                            <p class="textBlack m-0">
+                                                                <span *ngIf="SCESEvaluation?.SCESEvaluationType == 0">  - </span>
+                                                                <span *ngIf="SCESEvaluation?.SCESEvaluationType != 0"> {{SCESEvaluation?.FinancialStatus}} (Out of {{SCESEvaluation?.OutOfFinancialStatus}}) </span>
+                                                                
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-5 col-md-5 col-sm-5 col-12">
+                                                        <div class="innerStripdBox">
+                                                            <p>
+                                                                In House Info
+                                                            </p>
+                                                            <p class="textBlack m-0">
+                                                                <span *ngIf="SCESEvaluation?.SCESEvaluationType == 0">  - </span>
+                                                                <span *ngIf="SCESEvaluation?.SCESEvaluationType != 0">  {{SCESEvaluation?.Inhouseinformation}} (Out of {{SCESEvaluation?.OutOfInHouse}} ) </span>
+                                                               
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="innerBorderBox border-0">
+                                                <div class="row">
+                                                    <div class="col-lg-7 col-md-7 col-sm-7 col-12">
+                                                        <div class="innerStripdBox">
+                                                            <p>
+                                                                Qualitative Info
+                                                            </p>
+                                                            <p class="textBlack m-0">
+                                                                <span *ngIf="SCESEvaluation?.SCESEvaluationType == 0">  - </span>
+                                                                <span *ngIf="SCESEvaluation?.SCESEvaluationType != 0"> {{SCESEvaluation?.QualitativeInformation}}  (Out of  {{SCESEvaluation?.OutOfQualitative}} ) </span>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-12 col-sm-12 col-12">
+                            <div class="pageData h-nm-100 p-0 br-5 mt-991-20">
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                                        <div class="pageCardHeader">
+                                            <div class="row">
+                                                <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                                                    <div class="cardHeaderLeft">
+                                                        <h4 class="innerBoxTitle">
+                                                            Compliance
+                                                        </h4>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="pageCardBody p-0">
+                                            <div class="row">
+                                                <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                                                    <div class="innerBorderBox">
+                                                        <div class="row">
+                                                            <div class="col-lg-7 col-md-7 col-sm-7 col-12">
+                                                                <div class="innerStripdBox">
+                                                                    <p>
+                                                                        Sales Agreement
+                                                                    </p>
+                                                                    <p class=" {{SCESEvaluation?.IsThresholdBreachSalesAgreement? 'textRed': ''}} m-0">
+                                                                      {{SCESEvaluation?.SalesAgreement}}
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-5 col-md-5 col-sm-5 col-12">
+                                                                <div class="innerStripdBox">
+                                                                    <p>
+                                                                        P&G
+                                                                    </p>
+                                                                    <p class="{{SCESEvaluation?.IsThresholdBreachPG? 'textRed': ''}} m-0">
+                                                                        Year  {{SCESEvaluation?.PG}}
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="innerBorderBox">
+                                                        <div class="row">
+                                                            <div class="col-lg-7 col-md-7 col-sm-7 col-12">
+                                                                <div class="innerStripdBox">
+                                                                    <p>
+                                                                        AR Rec
+                                                                    </p>
+                                                                    <p class="{{SCESEvaluation?.IsThresholdBreachARRec ? 'textRed': 'textBlack'}} m-0">
+                                                                        Last Updated {{SCESEvaluation?.ARRec | date: 'MMM d, y'}}
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-5 col-md-5 col-sm-5 col-12">
+                                                                <div class="innerStripdBox">
+                                                                    <p>
+                                                                        Net Differance
+                                                                    </p>
+                                                                    <p class="{{SCESEvaluation?.IsThresholdBreachNetDifference ? 'textRed': 'textBlack'}}  m-0">
+                                                                        {{SCESEvaluation?.NetDifference}} Lac.
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="innerBorderBox" >
+                                                        <div class="row">
+                                                            <div class="col-lg-7 col-md-7 col-sm-7 col-12">
+                                                                <div class="innerStripdBox" >
+                                                                    <p>
+                                                                        Master Cheque
+                                                                    </p>
+                                                                    <p class="{{SCESEvaluation?.IsThresholdBreachMasterCheque ? 'textRed': ''}} m-0" >
+                                                                        {{SCESEvaluation?.MasterCheque ? SCESEvaluation?.MasterCheque : 'Not Available' }}
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="pageData p-0 br-5">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="pageCardHeader">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                            <div class="cardHeaderLeft">
+                                <h4>
+                                    <span>1 F</span> AR & Sales Trends
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pageCardBody">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-12 mb-20">
+                            <div class="mainTable2">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th colspan="2"></th>
+                                            <th class="text-center tableBorderRight tableBorderLeft">JAN</th>
+                                            <th class="text-center">FEB</th>
+                                            <th class="text-center tableBorderLeft">MAR</th>
+                                            <th class="text-center tableBorderLeft">APR</th>
+                                            <th class="text-center tableBorderLeft">MAY</th>
+                                            <th class="text-center tableBorderLeft">JUN</th>
+                                            <th class="text-center tableBorderLeft">JUL</th>
+                                            <th class="text-center tableBorderLeft">AUG</th>
+                                            <th class="text-center tableBorderLeft">SEP</th>
+                                            <th class="text-center tableBorderLeft">OCT</th>
+                                            <th class="text-center tableBorderLeft">NOV</th>
+                                            <th class="text-center tableBorderLeft">DEC</th>
+                                        </tr>
+                                        <tr>
+                                            <th class="pt-0">YTD Sales <br>(INR Lac)</th>
+                                            <th class="pt-0">Year wise <br>Ageing</th>
+                                            <th class="p-0 secondTh tableBorderRight tableBorderLeft">
+                                                <table>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>16-31</td>
+                                                            <td>>31</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </th>
+                                            <th class="p-0 secondTh tableBorderLeft">
+                                                <table>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>16-31</td>
+                                                            <td>>31</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </th>
+                                            <th class="p-0 secondTh tableBorderLeft">
+                                                <table>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>16-31</td>
+                                                            <td>>31</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </th>
+                                            <th class="p-0 secondTh tableBorderLeft">
+                                                <table>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>16-31</td>
+                                                            <td>>31</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </th>
+                                            <th class="p-0 secondTh tableBorderLeft">
+                                                <table>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>16-31</td>
+                                                            <td>>31</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </th>
+                                            <th class="p-0 secondTh tableBorderLeft">
+                                                <table>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>16-31</td>
+                                                            <td>>31</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </th>
+                                            <th class="p-0 secondTh tableBorderLeft">
+                                                <table>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>16-31</td>
+                                                            <td>>31</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </th>
+                                            <th class="p-0 secondTh tableBorderLeft">
+                                                <table>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>16-31</td>
+                                                            <td>>31</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </th>
+                                            <th class="p-0 secondTh tableBorderLeft">
+                                                <table>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>16-31</td>
+                                                            <td>>31</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </th>
+                                            <th class="p-0 secondTh tableBorderLeft">
+                                                <table>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>16-31</td>
+                                                            <td>>31</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </th>
+                                            <th class="p-0 secondTh tableBorderLeft">
+                                                <table>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>16-31</td>
+                                                            <td>>31</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </th>
+                                            <th class="p-0 secondTh tableBorderLeft">
+                                                <table>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>16-31</td>
+                                                            <td>>31</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr  *ngFor="let item of aRTrends; let i=index">
+                                            <td>{{item?.TotalinLakha?.toLocaleString('en-IN') }}</td>
+                                            <td>{{item?.Years}}</td>
+                                            <td class="tableBorderLeft tableBorderRight arTrendsTdPadding p-0 {{ item?.Jan_16_31>0 ?  'secondTh' : ''}} tableBorderLeft">
+                                                <div class="d-flex justify-content-between">
+                                                    <table>
+                                                        <tbody>
+                                                            <tr  *ngIf="item?.Jan_Over31">
+                                                                <td>{{item?.Jan_16_31}}</td>
+                                                                <td>{{item?.Jan_Over31}}</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </td>
+                                            <td class="arTrendsTdPadding p-0 {{ item?.Feb_16_31>0 ?  'secondTh' : ''}} tableBorderLeft">
+                                                <div class="d-flex justify-content-between">
+                                                    <table>
+                                                        <tbody>
+                                                            <tr  *ngIf="item?.Feb_Over31">
+                                                                <td>{{item?.Feb_16_31}}</td>
+                                                                <td>{{item?.Feb_Over31}}</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </td>
+                                            <td class="tableBorderLeft arTrendsTdPadding p-0 {{ item?.March_16_31>0 ?  'secondTh' : ''}} tableBorderLeft">
+                                                <div class="d-flex justify-content-between">
+                                                    <table>
+                                                        <tbody>
+                                                            <tr  *ngIf="item?.March_16_31">
+                                                                <td>{{item?.March_16_31}}</td>
+                                                                <td>{{item?.March_16_31}}</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div> 
+                                            </td>
+                                            <td class="tableBorderLeft arTrendsTdPadding p-0 {{ item?.April_16_31>0 ?  'secondTh' : ''}} tableBorderLeft">
+                                                <div class="d-flex justify-content-between">
+                                                    <table>
+                                                        <tbody>
+                                                            <tr  *ngIf="item?.April_Over31">
+                                                                <td>{{item?.April_16_31}}</td>
+                                                                <td>{{item?.April_Over31}}</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </td>
+                                            <td class="tableBorderLeft arTrendsTdPadding p-0 {{ item?.May_16_31>0 ?  'secondTh' : ''}} tableBorderLeft">
+                                                <div class="d-flex justify-content-between">
+                                                    <table>
+                                                        <tbody>
+                                                            <tr  *ngIf="item?.May_Over31">
+                                                                <td>{{item?.May_16_31}}</td>
+                                                                <td>{{item?.May_Over31}}</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </td>
+                                            <td class="tableBorderLeft arTrendsTdPadding p-0 {{ item?.June_Over31>0 ?  'secondTh' : ''}} tableBorderLeft">
+                                                <div class="d-flex justify-content-between">
+                                                    <table>
+                                                        <tbody>
+                                                            <tr  *ngIf="item?.June_Over31">
+                                                                <td>{{item?.June_16_31}}</td>
+                                                                <td>{{item?.June_Over31}}</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </td>
+                                            <td class="tableBorderLeft arTrendsTdPadding p-0 {{ item?.July_Over31>0 ?  'secondTh' : ''}} tableBorderLeft">
+                                                <div class="d-flex justify-content-between">
+                                                    <table>
+                                                        <tbody>
+                                                            <tr  *ngIf="item?.July_Over31">
+                                                                <td>{{item?.July_16_31}}</td>
+                                                                <td>{{item?.July_Over31}}</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </td>
+                                            <td class="tableBorderLeft arTrendsTdPadding p-0 {{ item?.Aug_Over31>0 ?  'secondTh' : ''}} tableBorderLeft">
+                                                <div class="d-flex justify-content-between">
+                                                    <table>
+                                                        <tbody>
+                                                            <tr  *ngIf="item?.Aug_Over31">
+                                                                <td>{{item?.Aug_16_31}}</td>
+                                                                <td>{{item?.Aug_Over31}}</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </td>
+                                            <td class="tableBorderLeft arTrendsTdPadding p-0 {{ item?.Sept_Over31>0 ?  'secondTh' : ''}} tableBorderLeft">
+                                                <div class="d-flex justify-content-between">
+                                                    <table>
+                                                        <tbody>
+                                                            <tr  *ngIf="item?.Sept_Over31">
+                                                                <td>{{item?.Sept_16_31}}</td>
+                                                                <td>{{item?.Sept_Over31}}</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </td>
+                                            <td class="tableBorderLeft arTrendsTdPadding p-0 {{ item?.Oct_Over31>0 ?  'secondTh' : ''}} tableBorderLeft">
+                                                <div class="d-flex justify-content-between">
+                                                    <table>
+                                                        <tbody>
+                                                            <tr  *ngIf="item?.Oct_Over31">
+                                                                <td>{{item?.Oct_16_31}}</td>
+                                                                <td>{{item?.Oct_Over31}}</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </td>
+                                            <td class="tableBorderLeft arTrendsTdPadding p-0 {{ item?.Nov_Over31>0 ?  'secondTh' : ''}} tableBorderLeft">
+                                                <div class="d-flex justify-content-between">
+                                                    <table>
+                                                        <tbody>
+                                                            <tr  *ngIf="item?.Nov_Over31">
+                                                                <td >{{item?.Nov_16_31}}</td>
+                                                                <td>{{item?.Nov_Over31}}</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </td>
+                                            <td class="tableBorderLeft arTrendsTdPadding p-0 {{ item?.Dec_Over31>0 ?  'secondTh' : ''}} tableBorderLeft">
+                                                <div class="d-flex justify-content-between">
+                                                    <table>
+                                                        <tbody>
+                                                            <tr *ngIf="item?.Dec_Over31">
+                                                                <td *ngIf="item?.Dec_Over31">{{item?.Dec_16_31}}</td>
+                                                                <td *ngIf="item?.Dec_Over31">{{item?.Dec_Over31}}</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                   
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="false">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                            
+                                <label class="form-label">Remarks</label>
+                                <textarea class="form-control" rows="1" formControlName="arRemark" ></textarea>
+                                <div *ngIf="submitted && f?.['arRemark']?.invalid " class="errorMessage mt-1">
+                                    <div class="text-danger" *ngIf="f?.['arRemark']?.errors && f?.['arRemark']?.errors?.['required']">
+                                        Ar remark is required
+                                    </div>
+                                  </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="pageData mb-20 p-0 br-5">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="pageCardHeader">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                            <div class="cardHeaderLeft">
+                                <h4>
+                                    Add Approver
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pageCardBody">
+                    <div class="row mb-20">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                            <div class="userApproverForm">
+                                <input type="text" placeholder="Please add approver name" [formControl]="control" [matAutocomplete]="auto">
+                                <img src="../../../../../assets/image/search-icon.svg" >
+                                <mat-autocomplete #auto="matAutocomplete">
+                                  <mat-option *ngFor="let approverSugg of filtereduserApprover | async" [value]="approverSugg" (click)="addaproverlist()">
+                                    {{approverSugg}}
+                                  </mat-option>
+                                </mat-autocomplete>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+        
+                            <div class="searchUserList" *ngFor="let data of approversList">
+                                <div class="row align-items-center">
+                                    <div class="col-lg-2 col-md-6 col-sm-6 col-12">
+                                        <p class="searchUserName">
+                                            {{data?.Name}}
+                                        </p>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                                        <p class="searchUserEmail">
+                                            {{data?.Email}}
+                                        </p>
+                                    </div>
+                                    <div class="col-lg-7 col-md-12 col-sm-12 col-12">
+                                        <div class="searchUserBtn">
+                                            <div class="buttonContainer mr-10">
+                                                <a>
+                                                    <button type="button" class="btn {{data?.IsNotifier ? 'outlineBtn1': '' }}" (click)="chnageToggle(data)">
+                                                        <img src="../../../../../assets/image/approve-icon.svg" class="pr-6 blackIcon">
+                                                        <img src="../../../../../assets/image/approve-hover-icon.svg" class="pr-6 greenIcon">
+                                                        Approver
+                                                    </button>
+                                                </a>
+                                            </div>
+                                            <div class="buttonContainer">
+                                                <a>
+                                                    <button type="button" class="btn {{data?.IsNotifier ? '': 'outlineBtn1' }}" (click)="chnageToggle(data)">
+                                                        <img src="../../../../../assets/image/noti-icon.svg" class="pr-6 notiWhiteIcon">
+                                                        <img src="../../../../../assets/image/noti-hover-icon.svg" class="pr-6 notiBlackIcon">
+                                                        Notify
+                                                    </button>
+                                                </a>
+                                            </div>
+                                            <div class="searchUserCloseIcon ml-10">
+                                                <img src="../../../../../assets/image/headerClose.svg">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                           
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                            <div class="text-right mt-20">
+                                <div class="buttonContainer">
+                                    <a>
+                                        <button type="button" class="btn" (click)="submitAprover()">
+                                            Submit
+                                        </button>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+ </div>
+<div  *ngIf="!partnerDetail">
+    <div  class="alert alert-warning py-3 my-5" >
+      {{message}}
+      </div>
+</div>

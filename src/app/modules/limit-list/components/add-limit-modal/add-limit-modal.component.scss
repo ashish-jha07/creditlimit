@@ -1,0 +1,28 @@
+// .custom-modalbox mat-dialog-container {
+//     border-radius: 40px !important;
+//     padding: 0 !important;
+// }
+
+// .custom-modalbox mat-dialog-container {
+//     border-radius: 40px !important;
+//     padding: 0 !important;
+// }
+
+// .modalInner {
+//         border-radius: 40px !important;
+//     padding: 0 !important;
+// }
+// .mat-dialog-container{
+//     border-radius: 40px !important;
+//     padding: 0 !important;
+// }
+.overlay {
+
+  z-index: 1000 !important;
+  
+}
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}

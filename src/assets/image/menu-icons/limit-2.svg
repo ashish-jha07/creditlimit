@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="27.5" height="27.5" viewBox="0 0 27.5 27.5">
+  <g id="_305-Box_List" data-name="305-Box List" transform="translate(-0.25 -0.25)">
+    <path id="Path_2166" data-name="Path 2166" d="M14,27H1V1H27V14" fill="none" stroke="#000" stroke-linejoin="round" stroke-width="1.5"/>
+    <rect id="Rectangle_4616" data-name="Rectangle 4616" width="8" height="9" transform="translate(10 1)" fill="none" stroke="#000" stroke-linejoin="round" stroke-width="1.5"/>
+    <line id="Line_84" data-name="Line 84" x2="8" transform="translate(10 6)" fill="none" stroke="#000" stroke-linejoin="round" stroke-width="1.5"/>
+    <ellipse id="Ellipse_408" data-name="Ellipse 408" cx="0.5" cy="1" rx="0.5" ry="1" transform="translate(17 17)" fill="none" stroke="#000" stroke-linejoin="round" stroke-width="1.5"/>
+    <line id="Line_85" data-name="Line 85" x2="5" transform="translate(21 18)" fill="none" stroke="#000" stroke-linejoin="round" stroke-width="1.5"/>
+    <circle id="Ellipse_409" data-name="Ellipse 409" cx="0.5" cy="0.5" r="0.5" transform="translate(17 23)" fill="none" stroke="#000" stroke-linejoin="round" stroke-width="1.5"/>
+    <line id="Line_86" data-name="Line 86" x2="5" transform="translate(21 24)" fill="none" stroke="#000" stroke-linejoin="round" stroke-width="1.5"/>
+  </g>
+</svg>

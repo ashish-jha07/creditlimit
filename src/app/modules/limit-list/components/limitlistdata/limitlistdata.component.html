@@ -1,0 +1,232 @@
+<div class="wrapper {{ isOpen ? 'expendSidebar' : ''}}">
+    <div class="pageBreadcreumbTitle">
+      <div class="breadcrumbContainer">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Limit Management</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Limit List</li>
+          </ol>
+        </nav>
+      </div>
+      <div class="pageTitle">
+          <h1>Limit List</h1>
+      </div>
+    </div>
+
+    <div class="pageData">
+      
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="buttonContainer text-right mb-20">
+                    <a href="javascript:void(0)" (click)="openreq()" >
+                        <button type="button" class="btn"  >
+                            Raise A Request
+                        </button>
+                    </a>
+                </div>
+                <div class="mainTable">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th colspan="6"></th>
+                                <th colspan="4">Existing</th>
+                                <th colspan="8">Revised</th>
+                                <th></th>
+                            </tr>
+                            <tr>
+                                <th>Sr No.</th>
+                                <th>Region</th>
+                                <th>Branch</th>
+                                <th>Partner Code</th>
+                                <th>Customer Name</th>
+                                <th>Customer Type</th>
+                                <th>BG</th>
+                                <th>ChannelFinance</th>
+                                <th>Open Limit</th>
+                                <th>Total</th>
+                                <th>BG</th>
+                                <th class="tablePercTh">%</th>
+                                <th>ChannelFinance</th>
+                                <th class="tablePercTh">%</th>
+                                <th>Open Limit</th>
+                                <th class="tablePercTh">%</th>
+                                <th>Total</th>
+                                <th class="tablePercTh">%</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let data of limitlistData">
+                                <td>{{data?.SrNo}}</td>
+                                <td>{{data?.Region}}</td>
+                                <td>{{data?.Branch}}</td>
+                                <td>{{data?.PartnerCode}} </td>
+                                <td>{{data?.CustomerName}}</td>
+                                <td>{{data?.CustomerType}} </td>
+                                <td>{{data?.BG}}</td>
+                                <td>{{data?.ChannelFinance}}</td>
+                                <td>{{data?.OpenLimit}} </td>
+                                <td>{{data?.Total}} </td>
+                                <td>{{data?.RevisedBG}} </td>
+                                <td>
+                                    <span class="tablePlusPerc">
+                                        {{data?.BGinPercent}}%
+                                    </span>
+                                </td>
+                                <td>{{data?.RevisedCF}}</td>
+                                <td>
+                                    <span class="tablePlusPerc">
+                                        {{data?.CFinPercent}}%
+                                    </span>
+                                </td>
+                                <td>{{data?.RevisedOL}}</td>
+                                <td>
+                                    <span class="tablePlusPerc">
+                                        {{data?.OLinPercent}}%
+                                    </span>
+                                </td>
+                                <td>{{data?.RevisedTotal}}</td>
+                                <td>
+                                    <span class="tablePlusPerc">
+                                        {{data?.TotalinPercent}}%
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="tableApproved">
+                                        {{data?.Status}}
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr *ngIf="limitlistData?.length == 0 || !limitlistData ">
+                                <td colspan="22" style="text-align: center;">No records found !</td>
+                                </tr>
+                            <!-- <tr>
+                                <td>2</td>
+                                <td>East-1</td>
+                                <td>Asansol</td>
+                                <td>1,500,000</td>
+                                <td>Sanjib Distrib.</td>
+                                <td>Deler</td>
+                                <td>50,000,000</td>
+                                <td>50,000,000</td>
+                                <td>50,000,000</td>
+                                <td>150,000,000</td>
+                                <td>50,000,000</td>
+                                <td>
+                                    <span class="tableMinusPerc">
+                                        -20%
+                                    </span>
+                                </td>
+                                <td>50,000,000</td>
+                                <td>
+                                    <span class="tableMinusPerc">
+                                        -20%
+                                    </span>
+                                </td>
+                                <td>50,000,000</td>
+                                <td>
+                                    <span class="tableMinusPerc">
+                                        -20%
+                                    </span>
+                                </td>
+                                <td>50,000,000</td>
+                                <td>
+                                    <span class="tableMinusPerc">
+                                        -20%
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="tableDecline">
+                                        Decline
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>East-1</td>
+                                <td>Guwahati</td>
+                                <td>1,500,000</td>
+                                <td>Deler</td>
+                                <td>Deler</td>
+                                <td>50,000,000</td>
+                                <td>50,000,000</td>
+                                <td>50,000,000</td>
+                                <td>150,000,000</td>
+                                <td>50,000,000</td>
+                                <td>
+                                    <span class="tablePlusPerc">
+                                        20%
+                                    </span>
+                                </td>
+                                <td>50,000,000</td>
+                                <td>
+                                    <span class="tablePlusPerc">
+                                        20%
+                                    </span>
+                                </td>
+                                <td>50,000,000</td>
+                                <td>
+                                    <span class="tablePlusPerc">
+                                        20%
+                                    </span>
+                                </td>
+                                <td>50,000,000</td>
+                                <td>
+                                    <span class="tablePlusPerc">
+                                        20%
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="tablePending">
+                                        Pending
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>East-1</td>
+                                <td>Kolkata</td>
+                                <td>1,500,000</td>
+                                <td>Special Cust</td>
+                                <td>Special Cust</td>
+                                <td>50,000,000</td>
+                                <td>50,000,000</td>
+                                <td>50,000,000</td>
+                                <td>150,000,000</td>
+                                <td>50,000,000</td>
+                                <td>
+                                    <span class="tableMinusPerc">
+                                        -80%
+                                    </span>
+                                </td>
+                                <td>50,000,000</td>
+                                <td>
+                                    <span class="tableMinusPerc">
+                                        -80%
+                                    </span>
+                                </td>
+                                <td>50,000,000</td>
+                                <td>
+                                    <span class="tableMinusPerc">
+                                        -80%
+                                    </span>
+                                </td>
+                                <td>50,000,000</td>
+                                <td>
+                                    <span class="tableMinusPerc">
+                                        -80%
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="tableApproved">
+                                        Approved
+                                    </span>
+                                </td>
+                            </tr> -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+ </div>

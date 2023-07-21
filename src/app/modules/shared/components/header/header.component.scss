@@ -1,0 +1,195 @@
+.mainHeader {
+    background: #FFF;
+    padding: 14px 15px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 99;
+}
+
+.headerLeftSide {
+    display: flex;
+    align-items: center;
+}
+
+.headerLeftSide .logoContainer span {
+    padding-left: 25px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.headerRightSide .headerUserContainer {
+    text-align: right;
+    width: fit-content;
+    float: right;
+}
+
+.headerUserProfile {
+    background-color: #E7ECF2;
+    border-radius: 50%;
+    height: 42px;
+    width: 42px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.headerUserProfile p {
+    font-size: 16px;
+    text-align: center;
+    margin: 0;
+    font-weight: 700;
+    color: #000;
+}
+
+.headerUserData:hover {
+    cursor: pointer;
+}
+
+.headerUserData .headerUserName {
+    margin: 0 10px 0 0;
+}
+
+.headerUserData .headerUserName h3 {
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.headerUserData .headerUserName p {
+    margin: 0;
+    font-size: 12px;
+    line-height: 14px;
+    font-weight: 400;
+}
+
+.headerUserData {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.headerUserDownIcon svg {
+    width: 12px;
+    height: 12px;
+    position: relative;
+    top: -10px;
+    margin: 0 8px 0 0;
+}
+
+.headerUserDropdown {
+    display: none;
+}
+
+.headerUserContainer:hover .headerUserDropdown {
+    position: absolute;
+    top: 46px;
+    right: 18px;
+    z-index: 99999;
+    display: block;
+    padding: 17px 0 0 0;
+}
+
+.headerUserContainer:hover .headerUserDropdown ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    min-width: 150px;
+    border-radius: 10px;
+    box-shadow: 0 .125rem .25rem rgba(0,0,0,.075)!important;
+    background: #fff;
+    border: 1px solid #F4F4F4;
+}
+
+.headerUserContainer:hover .headerUserDropdown ul::before {
+    content: "";
+    position: absolute;
+    top: 9px;
+    right: 9px;
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid #f4f4f4;
+}
+
+.headerUserContainer:hover .headerUserDropdown ul li {
+    border-bottom: 1px solid #F4F4F4;
+    text-align: left;
+}
+
+.headerUserContainer:hover .headerUserDropdown ul li:first-child {
+    padding: 14px 10px;
+    display: none;
+}
+
+.headerUserContainer:hover .headerUserDropdown ul li:last-child {
+    border-bottom: none;
+}
+
+.headerUserContainer:hover .headerUserDropdown ul li:hover {
+    background: #F4F4F4;
+}
+
+.headerUserContainer:hover .headerUserDropdown ul li:first-child:hover {
+    background: #F4F4F4;
+    border-radius: 10px 10px 0 0;
+}
+
+.headerUserContainer:hover .headerUserDropdown ul li:last-child:hover {
+    background: #F4F4F4;
+    border-radius: 0 0 10px 10px;
+}
+
+.headerUserContainer:hover .headerUserDropdown ul li a {
+    color: #000;
+    font-size: 14px;
+    text-decoration: none;
+    line-height: 40px !important;
+    padding: 0 10px;
+    display: block;
+}
+
+.headerUserContainer:hover .headerUserDropdown ul li a .svgUserIcon {
+    margin-right: 4px;
+    width: 24px;
+}
+
+@media (max-width: 991px) {
+    .sidebarMenuIcon {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .headerLeftSide .logoContainer span {
+        display: none;
+    }
+}
+
+@media (max-width: 415px) {
+    .headerUserData .headerUserName, .headerUserData .headerUserDownIcon {
+        display: none;
+    }
+
+    .headerUserContainer:hover .headerUserDropdown ul li:first-child {
+        padding: 14px 10px;
+        display: block;
+    }
+    
+    .headerUserContainer:hover .headerUserDropdown ul li:first-child h3 {
+        padding: 0;
+        margin: 0;
+        font-size: 14px;
+        font-weight: 600;
+    }
+    
+    .headerUserContainer:hover .headerUserDropdown ul li:first-child p {
+        padding: 0;
+        margin: 0;
+        font-size: 12px;
+        font-weight: 400;
+    }
+}
+
+

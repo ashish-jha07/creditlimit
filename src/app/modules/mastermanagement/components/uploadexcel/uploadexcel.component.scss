@@ -1,0 +1,29 @@
+.closeBtn{
+    color: #ff0000;
+}
+.errorMessage {
+    color: #ff0000;
+}
+
+.selectOption .mat-form-field {
+    width: 100%;
+}
+
+.wrapper {
+    width: 100%;
+    left: 0;
+}
+
+.themeBorderBox {
+    border: 1px solid #DDDDDD;
+    padding: 18px;
+    border-radius: 10px;
+    height: 90%;
+}
+
+@media (max-width: 768px) {
+    .wrapper {
+        width: calc(100vw - 0px) !important;
+        left: 0 !important;
+    }
+}

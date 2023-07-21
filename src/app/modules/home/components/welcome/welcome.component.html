@@ -1,0 +1,64 @@
+<div class="welcomeContainer">
+    <div>
+        <div class="welcomeTitle">
+            <h1>
+                Welcome to
+                <span>Credit Limit Management System</span>
+            </h1>
+        </div>
+        
+        <div class="{{roleWiseData.length  ? 'welcomeCardsContainer'+roleWiseData.length :'welcomeCardsContainer' }}">
+            <div class="welcomeCardBg" *ngFor="let item of roleWiseData"  (click)="goToUpload(item?.ModuleName)" >
+                <a href="javascript:void(0)">
+                    <div class="welcomeCard" >
+                        <img src="{{'../../../../../assets/image/welcome/'+item?.ModuleCode+'.svg'}}" onError="this.src='../../../../../assets/image/welcome/w5.svg'" alt="Data Upload">
+                        <h2>{{item?.ModuleName}}</h2>
+                    </div>
+                </a>
+            </div>
+        </div>
+    
+        <!-- <div class="welcomeCardsContainer">
+            <div class="welcomeCardBg"  (click)="goToUpload('Data Upload')">
+                <a href="javascript:void(0)">
+                    <div class="welcomeCard" >
+                        <img src="../../../../../assets/image/welcome/w1.svg" alt="Data Upload">
+                        <h2>Data Upload</h2>
+                    </div>
+                </a>
+            </div>
+            <div class="welcomeCardBg">
+                <a href="javascript:void(0)">
+                    <div class="welcomeCard">
+                        <img src="../../../../../assets/image/welcome/w2.svg" alt="Data Management">
+                        <h2>Data Management</h2>
+                    </div>
+                </a>
+            </div>
+            <div class="welcomeCardBg" (click)="goToUpload('Limit Management')">
+                <a href="javascript:void(0)">
+                    <div class="welcomeCard">
+                        <img src="../../../../../assets/image/welcome/w3.svg" alt="Limit Management">
+                        <h2>Limit Management</h2>
+                    </div>
+                </a>
+            </div>
+            <div class="welcomeCardBg">
+                <a href="javascript:void(0)">
+                    <div class="welcomeCard">
+                        <img src="../../../../../assets/image/welcome/w4.svg" alt="Reports">
+                        <h2>Reports</h2>
+                    </div>
+                </a>
+            </div>
+            <div class="welcomeCardBg">
+                <a href="javascript:void(0)">
+                    <div class="welcomeCard">
+                        <img src="../../../../../assets/image/welcome/w5.svg" alt="Check Rule Management">
+                        <h2>Check Rule Management</h2>
+                    </div>
+                </a>
+            </div>
+        </div> -->
+    </div>
+</div>

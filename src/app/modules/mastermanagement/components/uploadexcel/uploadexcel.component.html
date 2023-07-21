@@ -1,0 +1,127 @@
+ <div class="wrapper">
+    <div class="pageBreadcreumbTitle">
+      <div class="breadcrumbContainer">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a routerLink="/home/welcome">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Data Upload</li>
+          </ol>
+        </nav>
+      </div>
+      <div class="pageTitle">
+          <h1>Excel Upload</h1>
+      </div>
+    </div>
+
+    <div class="pageData">
+      <div class="row">
+        <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+          <div class="selectOption">
+            <div class="form-group">
+              <label>Select Master</label>
+              <!-- <select class="form-control" id="selectMaster">
+                <option>AR History</option>
+                <option>AR History 2</option>
+              </select> -->
+              <mat-form-field appearance="fill" >
+                <mat-select  [(ngModel)]="masterName" placeholder="Choose Any One" (ngModelChange)="modelChangeFn($event)">
+                  <mat-option *ngFor="let master of masterDropDownList" [value]="master" >
+                    {{master.ModuleName}}
+                  </mat-option>
+                
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row" >
+        <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+          <div class="pageInnerTitle">
+            <h3>Upload data for <span>{{masterName?.ModuleName}}</span></h3>
+          </div>
+          <div class="themeBorderBox">
+            <div class="buttonContainer text-right">
+              <a >
+                <button type="button" class="btn" (click)="downloadkit()">Download Template</button>
+              </a>
+            </div>
+            <div class="uploadFileContainer">
+              <span *ngIf="!filename" class="uploadTxt">
+                 Excel File Upload
+              </span>
+              <h1 *ngIf="!filename"> 
+                  <img src="../../../../../assets/image/upload-icon.svg" alt="Upload Icon">
+              </h1> 
+              <h1 *ngIf="filename" class="">
+                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-file-earmark-excel" viewBox="0 0 16 16">
+                  <path d="M5.884 6.68a.5.5 0 1 0-.768.64L7.349 10l-2.233 2.68a.5.5 0 0 0 .768.64L8 10.781l2.116 2.54a.5.5 0 0 0 .768-.641L8.651 10l2.233-2.68a.5.5 0 0 0-.768-.64L8 9.219l-2.116-2.54z"/>
+                  <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/>
+                </svg>
+              </h1>
+              <span *ngIf="filename">{{filename}} 
+                <span class="closeBtn" (click)="deletefile()">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"/>
+                    <path fill-rule="evenodd" d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"/>
+                  </svg>
+                </span>
+              </span> 
+              <input type="file" #inputFile id="file" (change)="findfile($event)" class="input {{!filename ? 'distypes' : 'distypeh'}}" >
+              <div *ngIf="errorflag" class="errorMessage mt-2">{{errorMessage}}</div>
+      
+            </div>
+            <div class="buttonContainer text-center mt-3">
+              <a >
+                <button  class="btn outlineBtn" type="button" (click)="uploadFileData()" [disabled]="!fileData || fileData.length===0?true:false"  >Upload</button>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+          <div class="pageInnerTitle">
+            <h3>Download Data for <span>{{masterName?.ModuleName}}</span></h3>
+          </div>
+          <div class="themeBorderBox">
+            <form [formGroup]="fileDownloadForm" novalidate (ngSubmit)="downloadData()">
+
+            <div class="buttonContainer text-right">
+              <a>
+                <button type="submit" class="btn" [disabled]="!fileDownloadForm.valid">Download</button>
+              </a>
+            </div>
+            <div class="datepickerContainer">
+                <div class="row">
+                  <div class="col-lg-6 col-md-6 col-sm-6 col-12">
+                    <div class="inputGroup">
+                      <label class="formLabel">From Date</label>
+                      <mat-form-field floatLabel="never" class="no-line" appearance="fill">
+                        <input    matInput [matDatepicker]="picker" formControlName="from_date">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-md-6 col-sm-6 col-12">
+                    <div class="inputGroup">
+                      <label class="formLabel">To Date</label>
+                      <mat-form-field floatLabel="never" class="no-line" appearance="fill">
+                        <input     matInput [matDatepicker]="picker1" formControlName="To_date" [min]="f?.['from_date']?.value">
+                        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                        <mat-datepicker #picker1></mat-datepicker>
+                      </mat-form-field>
+                      <mat-error *ngIf="fileDownloadForm?.hasError('notValid')" class="mt-2">End date should be greater than or equal to Start date</mat-error>
+
+                    </div>
+                  </div>
+
+                  <!-- <small *ngIf="fileDownloadForm?.hasError('notValid')">Not valid</small> -->
+                </div>
+              
+            </div>
+          </form>
+          </div>
+        </div>
+      </div>
+    </div>
+ </div>

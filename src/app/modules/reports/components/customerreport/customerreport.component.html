@@ -1,0 +1,78 @@
+<div class="wrapper {{ isOpen ? 'expendSidebar' : ''}}">
+    <div class="pageBreadcreumbTitle">
+      <div class="breadcrumbContainer">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Report</a></li>
+            <li class="breadcrumb-item active"><a href="#">Customer Performance Report</a></li>
+            <!-- <li class="breadcrumb-item " aria-current="page">Raise A Request</li> -->
+          </ol>
+        </nav>
+      </div>
+      <div class="pageTitle">
+          <h1>Customer Performance Report</h1>
+      </div>
+    </div>
+
+    <!-- 'btn-light': 'btn-dark' -->
+    <div class="">
+        <!-- <div class="themeTabs">
+            <button type="button" class="btn {{requestType ? 'themeTabBtn': 'themeTabBtn active'}}" (click)=" individualTab()">
+                Individual Partner
+            </button>
+            <button type="button" class="btn {{!requestType ? 'themeTabBtn': 'themeTabBtn active'}}" (click)=" bulkTab()">
+                Bulk Request
+            </button>
+        </div> -->
+        <div class="searchContainer"> 
+            <div class="row">
+                <div class="col-lg-5 col-md-8 col-sm-8 col-xs-12">
+                    <form [formGroup]="reqForm">
+                        <div  formArrayName="partnerIds">
+                            <div class="row position-relative mb-3" *ngFor="let partnerId of partnerIds.controls; let i=index">
+                                <div class="col-lg-8 col-md-8 col-sm-8 col-12">
+                                    <label class="mb-10" for="partnerId-{{ i }}">Enter a partner code</label>
+                                    <input type="text"  id="partnerId-{{ i }}" [formControlName]="i" class="form-control themeTextInput" autocomplete="off">
+                                    <div class="invalid-feedback" style="display:block;" *ngIf=" submit && partnerIds.controls[i].invalid">
+                                     <span *ngIf="partnerIds.controls[i].errors?.['required']">   Please enter partner code.</span>
+                                      </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-2 col-12" *ngIf="requestType">
+                                    <div class="bulkPlusDelBtn" >
+                                        <div class="plusBtn" *ngIf="(partnerIds.controls.length ==  (i+1)) && i<4" (click)="addPartnerId()">
+                                            <img src="../../../../../assets/image/headerClose.svg">
+                                        </div>
+                                        <div class="deleteBtn" *ngIf="i!=0" (click)="deletePartnerId(i)">
+                                            <img src="../../../../../assets/image/delete-icon.svg">
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                     
+                        <div class="row">
+                            <div  class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                <div class="buttonContainer mt-10-576">
+                                    <button type="button" class="btn" (click)="raiseAreq()">
+                                        Search
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="themeSubTabs" *ngIf="requestarray.length > 0">
+    
+        <div *ngFor="let item of requestarray; let i=index">
+            <div *ngIf="currentTab == 'partner'+i">
+                <app-downloadreportdetail partnerCode="{{item}}"></app-downloadreportdetail>
+                <!-- <app-limit-dashboard partnerCode="{{item}}"></app-limit-dashboard> -->
+                <!-- <app-dummy-daskboard partnerCode="{{item}}"></app-dummy-daskboard> -->
+            </div>
+        </div>
+    </div>
+ </div>

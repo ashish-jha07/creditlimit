@@ -1,0 +1,38 @@
+<div class="menuHeader">
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+        <ul class="headerMenuUl">
+          <li *ngFor="let item of roleWiseArray">
+            <a href="javascript:void(0)" class=" {{type == item?.ModuleCode ? 'active':''}}" (click)="goTo(item?.ModuleName)">
+              {{item?.ModuleName}}
+            </a>
+          </li>
+          <!-- <li>
+            <a href="javascript:void(0)" class=" {{type == 'limit'? 'active':''}}" (click)="goTo('Limit Management')">
+              Limit Management
+            </a>
+          </li>
+          <li>
+            <a href="javascript:void(0)">
+              Data Management
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              Check Rule Management
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              Alerts
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              Reports
+            </a>
+          </li> -->
+        </ul>
+      </div>
+    </div>
+  </div>

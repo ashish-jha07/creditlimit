@@ -1,0 +1,18 @@
+.wrapper {
+    width: 100%;
+    left: 0;
+}
+.sapBorderBox {
+   // border: 1px solid #DDD;
+    padding: 18px;
+    border-radius: 10px;
+    height: 100%;
+}
+.pageData {
+    border: 0px solid #DDD;
+    border-bottom: 1px solid #DDD;
+    padding: 18px;
+    border-radius: 0px;
+    height: fit-content;
+    height: -moz-fit-content;
+}

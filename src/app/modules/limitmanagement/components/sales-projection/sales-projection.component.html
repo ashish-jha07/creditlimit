@@ -1,0 +1,278 @@
+<div class="wrapper {{ isOpen ? 'expendSidebar' : ''}}">
+    <div class="pageBreadcreumbTitle">
+      <div class="breadcrumbContainer">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Limit Management</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Sales Projection</li>
+          </ol>
+        </nav>
+      </div>
+      <div class="pageTitle">
+          <h1>Sales Projection</h1>
+      </div>
+    </div>
+
+    <div class="pageData">
+      <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-12"  [formGroup]="downloadData" >
+          <div class="themeBorderBox">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="selectOption">
+                        <div class="form-group">
+                            <label>Region<span style="color:red;">*</span> </label>
+                            <mat-form-field appearance="fill">
+                                <mat-select  formControlName="region"  placeholder="Choose Any Region">
+                                  <mat-option *ngFor="let item of regiones" [value]="item.RegionName" >
+                                    {{item.RegionName}}
+                                  </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <div *ngIf="submita && f?.['region']?.invalid " class="errorMessage mt-1">
+                              <div *ngIf="f?.['region']?.errors && f?.['region']?.errors?.['required']">
+                                Region field is required
+                              </div>
+                            
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                  <label _ngcontent-jbq-c133="" class="formLabel">Customer Code</label>
+                  <div class="themeTabs">
+                    <button type="button" class="btn {{requestType ? 'activeAll': 'activeAll active'}}" (click)=" requestType =  false ;">
+                      All Mapped
+                    </button>
+                    <button type="button" class="btn {{!requestType ? 'activeAll': 'activeAll active'}}" (click)="requestType = true ;">
+                      Specific Customer
+                    </button>
+                </div>
+                 
+                      <div label="All Mapped">
+                        <div class="tabTextarea mt-20" *ngIf="requestType">
+                          <mat-form-field appearance="fill">
+                            <textarea matInput rows="5"></textarea>
+                          </mat-form-field>
+                        </div>
+                        <div class="datepickerContainer">
+                           
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-12">
+                                        <div class="inputGroup">
+                                            <label class="formLabel">Projection Period<span style="color:red;">*</span></label>
+                                            <!-- <mat-form-field floatLabel="never" class="no-line" appearance="fill">  (dateChange)="addEvent('change', $event)"
+                                              <input    matInput [matDatepicker]="picker" formControlName="startDate">  (dateChange)="addEvent1('change', $event)" 
+                                              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                              <mat-datepicker #picker></mat-datepicker>
+                                            </mat-form-field> -->
+                                            <input type="month"   class="form-control"  formControlName="startDate" id="startDate" name="startDate"
+                                            min="{{minDate}}"  (change)="calculateDiff();getMinDate()">
+                                            <!-- <mat-form-field floatLabel="never" class="no-line" appearance="fill">
+                                                <input  [value]="f?.['startDate']?.value" formControlName="startDate" matInput [matDatepicker]="startDate">
+                                                <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
+                                                <mat-datepicker #startDate  ></mat-datepicker>
+                                            </mat-form-field> -->
+                                            <div *ngIf="submita && f?.['startDate']?.invalid " class="errorMessage mt-1">
+                                              <div *ngIf="f?.['startDate']?.errors && f?.['startDate']?.errors?.['required']">
+                                                Please select start month and year
+                                              </div>
+                                            
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-12">
+                                        <div class="inputGroup">
+                                            <label class="formLabel">&nbsp;</label>
+                                            <input type="month"  required class="form-control"  formControlName="endDate" id="month" name="month"
+                                            min="{{minDate}}" (change)="calculateDiff() ;getMinDate()"  >
+                                            <!-- <mat-form-field floatLabel="never" class="no-line" appearance="fill">
+                                                <input [value]="f?.['endDate']?.value" formControlName="endDate" matInput [matDatepicker]="endDate" [min]="f?.['startDate']?.value">
+                                                <mat-datepicker-toggle matSuffix [for]="endDate"></mat-datepicker-toggle>
+                                                <mat-datepicker #endDate></mat-datepicker>
+                                            </mat-form-field> -->
+                                            <mat-error *ngIf="f?.['endDate']?.valid && downloadData?.hasError('notValid')" class="mt-2">End month and year should be greater than or equal to Start month and year</mat-error>
+                                            <div *ngIf="submita && f?.['endDate']?.invalid " class="errorMessage mt-1">
+                                              <div *ngIf="f?.['endDate']?.errors && f?.['endDate']?.errors?.['required']">
+                                                Please select end month and year 
+                                              </div>
+                                            
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div *ngIf="dateRangediff &&  !downloadData?.hasError('notValid')" class="errorMessage mt-1">
+                                      <div *ngIf="dateRangediff ">
+                                        Start date and End date should be between two years
+                                      </div>
+                                    
+                                    </div>
+                                    <div *ngIf="minDateError && !dateRangediff &&  !downloadData?.hasError('notValid')" class="errorMessage mt-1">
+                                      <div *ngIf="minDateError ">
+                                        Start date can't be less than {{minDate}}
+                                      </div>
+                                    
+                                    </div>
+                                    
+                                </div>
+                            
+                        </div>
+                      </div>
+                   
+                 
+              </div>
+          </div>
+            <!-- <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                    <label _ngcontent-jbq-c133="" class="formLabel">Customer Codes</label>
+                    <mat-tab-group class="matTabsContainer" animationDuration="0ms" mat-align-tabs="start" [selectedIndex]="0">
+                        <mat-tab label="All Mapped">
+                          <div class="datepickerContainer">
+                              <form>
+                                  <div class="row">
+                                      <div class="col-lg-6 col-md-6 col-sm-6 col-12">
+                                          <div class="inputGroup">
+                                              <label class="formLabel">Projection Period</label>
+                                              <mat-form-field floatLabel="never" class="no-line" appearance="fill">
+                                                  <input  [value]="f?.['startDate']?.value" formControlName="startDate" (dateChange)="addEvent('change', $event)" matInput [matDatepicker]="startDate">
+                                                  <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
+                                                  <mat-datepicker #startDate  ></mat-datepicker>
+                                              </mat-form-field>
+                                              <div *ngIf="submita && f?.['startDate']?.invalid " class="errorMessage mt-1">
+                                                <div *ngIf="f?.['startDate']?.errors && f?.['startDate']?.errors?.['required']">
+                                                  Please select date
+                                                </div>
+                                              
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <div class="col-lg-6 col-md-6 col-sm-6 col-12">
+                                          <div class="inputGroup">
+                                              <label class="formLabel">&nbsp;</label>
+                                              <mat-form-field floatLabel="never" class="no-line" appearance="fill">
+                                                  <input [value]="f?.['endDate']?.value" formControlName="endDate" (dateChange)="addEvent1('change', $event)"  matInput [matDatepicker]="endDate">
+                                                  <mat-datepicker-toggle matSuffix [for]="endDate"></mat-datepicker-toggle>
+                                                  <mat-datepicker #endDate></mat-datepicker>
+                                              </mat-form-field>
+                                              <div *ngIf="submita && f?.['endDate']?.invalid " class="errorMessage mt-1">
+                                                <div *ngIf="f?.['endDate']?.errors && f?.['endDate']?.errors?.['required']">
+                                                  Please select date
+                                                </div>
+                                              
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </form>
+                          </div>
+                        </mat-tab>
+                        <mat-tab label="Specific"> 
+                            <div class="tabTextarea mt-20">
+                              <mat-form-field appearance="fill">
+                                <textarea matInput rows="5"></textarea>
+                              </mat-form-field>
+                            </div>
+                            <div class="datepickerContainer mt-0">
+                                <form>
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-12">
+                                            <div class="inputGroup">
+                                                <label class="formLabel">Projection Period</label>
+                                                <mat-form-field floatLabel="never" class="no-line" appearance="fill">
+                                                    <input value="2022-02-22" matInput [matDatepicker]="picker">
+                                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                                    <mat-datepicker #picker></mat-datepicker>
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-12">
+                                            <div class="inputGroup">
+                                                <label class="formLabel">&nbsp;</label>
+                                                <mat-form-field floatLabel="never" class="no-line" appearance="fill">
+                                                    <input value="2022-03-22" matInput [matDatepicker]="picker1">
+                                                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                                                    <mat-datepicker #picker1></mat-datepicker>
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>    
+                        </mat-tab>
+                    </mat-tab-group>
+                </div>
+            </div> -->
+
+            <div class="buttonContainer text-right mt-18">
+              <a (click)="downLoadExcelFile()">
+                <button type="button" class="btn">Download Data</button>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+          <div class="themeBorderBox" [formGroup]="uploadForm" >
+            <div class="buttonContainer text-right mb-18">
+              <a href="javascript:void(0)">
+                <button type="button" class="btn" (click)="downloadkit()">
+                  Download Template 
+                  <span title="Kindly follow this template to upload the data in the selected master. The data should be in the defined format.">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                      <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                      <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                    </svg>
+                  </span>
+                </button>
+              </a>
+            </div>
+            <label class="formLabel">Upload Request Form</label>
+            <div class="uploadFileContainer">
+              <span *ngIf="!uploadForm.controls['fileexcel'].value" class="uploadTxt">
+                Excel File Upload
+              </span>
+              <h1 *ngIf="!uploadForm.controls['fileexcel'].value"> 
+                  <img src="../../../../../assets/image/upload-icon.svg" alt="Upload Icon">
+              </h1> 
+              <h1 *ngIf="uploadForm.controls['fileexcel'].value" class="">
+                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-file-earmark-excel" viewBox="0 0 16 16">
+                  <path d="M5.884 6.68a.5.5 0 1 0-.768.64L7.349 10l-2.233 2.68a.5.5 0 0 0 .768.64L8 10.781l2.116 2.54a.5.5 0 0 0 .768-.641L8.651 10l2.233-2.68a.5.5 0 0 0-.768-.64L8 9.219l-2.116-2.54z"/>
+                  <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/>
+                </svg>
+              </h1>
+              <span *ngIf="uploadForm.controls['fileexcel'].value">{{uploadForm.controls['fileexcel'].value.split("\\").pop()}} 
+                <span class="closeBtn" (click)="deletefile($event)">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"/>
+                    <path fill-rule="evenodd" d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"/>
+                  </svg>
+                </span>
+              </span> 
+              <input type="file"  id="fileexcel"  formControlName="fileexcel"  (change)="findfile($event)" class="input {{!uploadForm.controls['fileexcel'].value ? 'distypes' : 'distypeh'}}" >
+              <div *ngIf="submit && fileexcel?.invalid " class="errorMessage mt-1">
+                <div *ngIf="fileexcel?.errors && fileexcel?.errors?.['required']">
+                  Please select an excel file.
+                </div>
+              
+              </div>
+              <div *ngIf="isEmty" class="errorMessage mt-1">
+                The uploaded file is empty.
+              </div>
+              <div *ngIf="notExcel" class="errorMessage mt-1">
+                Invalid file type. Kindly select excel file type to upload the data.
+              </div>
+              
+            </div>
+            <div class="buttonContainer text-center mt-3">
+              <a >
+                <button  class="btn outlineBtn" type="button" (click)="uploadFileData()"   >Upload</button>
+              </a>
+            </div>
+        
+          </div>
+        </div>
+      </div>
+    </div>
+ </div>

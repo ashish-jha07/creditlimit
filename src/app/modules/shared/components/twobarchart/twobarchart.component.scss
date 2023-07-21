@@ -1,0 +1,23 @@
+.twoBarChart {
+    width: 100%;
+    display: flex;
+    position: relative;
+    align-items: center;
+}
+
+.twoBarChart canvas {
+    padding-left: 20px;
+}
+
+.twoBarChart .twoLineChartLeftTxt {
+    transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    -ms-writing-mode: tb-rl;
+    -webkit-writing-mode: vertical-rl;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    position: absolute;
+    white-space: nowrap;
+    font-size: 12px;
+    color: #838181;
+}
